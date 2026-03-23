@@ -1,0 +1,73 @@
+###############
+# PYTHON / DJANGO
+###############
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+# Django migrations (optional — uncomment if you want)
+# */migrations/
+
+# Environment variable files
+.env
+*.env
+
+# SQLite DB (optional)
+*.sqlite3
+
+# Log files
+*.log
+logs/
+
+###############
+# FRONTEND (Vite / React)
+###############
+
+# Node modules
+node_modules/
+
+# Build output
+dist/
+dist-ssr/
+
+# Local environment overrides
+*.local
+
+# Debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+###############
+# EDITOR / SYSTEM FILES
+###############
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+
+# PyCharm
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
