@@ -1,0 +1,216 @@
+/* ================================
+   Global Reset & Base Styles
+================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #001f3f;
+  background-color: #ffffff;
+}
+
+/* ================================
+   Navbar Styles
+================================ */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(4px);
+  padding: 5px 4vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  z-index: 9999;
+  transition: all 0.8s ease;
+}
+
+.navbar.navbar-scrolled {
+  background: rgba(0, 33, 77, 0.96);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+/* ================================
+   Logo
+================================ */
+.navbar-logo img {
+  height: 150px;
+  transform: translateY(10%);
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo img:hover {
+  transform: translateY(20%);
+}
+
+/* ================================
+   Center Nav Links
+================================ */
+.navbar-center {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #001f3f;
+  font-size: 1.8rem;
+  font-weight: 400;
+  position: relative;
+  cursor: pointer;
+  transition: color 0.4s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #ffa94d;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffa94d;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.navbar.navbar-scrolled .nav-link {
+  color: #ffffff;
+}
+
+/* ================================
+   Dropdown (Curriculum)
+================================ */
+.nav-dropdown {
+  position: relative;
+}
+
+.dropdown-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-icon {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-dropdown:hover .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+/* Dropdown box */
+.dropdown-menu {
+  position: absolute;
+  top: 130%;
+  left: 0;
+  background: rgba(0, 33, 77, 0.97);
+  backdrop-filter: blur(10px);
+  min-width: 220px;
+  border-radius: 14px;
+  padding: 14px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.35s ease;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 12px 24px;
+  color: #ffffff;
+  font-size: 1.6rem;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background: rgb(181, 210, 221);
+  color: rgba(0, 33, 77, 0.97);
+}
+
+/* ================================
+   Right Section
+================================ */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.homepage-signin-btn {
+  padding: 10px 26px;
+  border: 2px solid #ffa94d;
+  background: transparent;
+  border-radius: 40px;
+  color: #001f3f;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.homepage-signin-btn:hover {
+  background: #ffa94d;
+  transform: translateY(-2px);
+}
+
+.navbar.navbar-scrolled .homepage-signin-btn {
+  background: #ffa94d;
+  color: #001f3f;
+}
+
+.navbar-icon {
+  font-size: 2rem;
+  cursor: pointer;
+  color: #001f3f;
+  transition: all 0.4s ease;
+}
+
+.navbar-icon:hover {
+  color: #ffa94d;
+  transform: rotate(-12deg) scale(1.1);
+}
+
+.navbar.navbar-scrolled .navbar-icon {
+  color: #ffa94d;
+}
+
+/* ================================
+   Spacer
+================================ */
+.navbar-spacer {
+  height: 0;
+}
+
+/* ================================
+   Responsive (Optional Enhancement)
+================================ */
+@media (max-width: 992px) {
+  .navbar-center {
+    display: none;
+  }
+}
