@@ -8,8 +8,8 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from external.pagination import CustomPagination
 from external.swagger_query_params import set_query_params
-from backend.modules.users.serializers.serializers import *
-from backend.modules.users.models.models import *
+from ..serializers.serializers import *
+from ..models.models import *
 from external.send_message import send_email
 from rest_framework import status
 from external.decorators import allowed_users

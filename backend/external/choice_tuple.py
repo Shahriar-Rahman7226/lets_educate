@@ -1,7 +1,6 @@
 
 USER_ROLES = (
     ('SUPER_USER', 'super_user'),
-    ('SUPER_ADMIN', 'super_admin'),
     ('ADMIN', 'admin'),
     ('TUTOR', 'tutor'),
     ('STUDENT', 'student'),

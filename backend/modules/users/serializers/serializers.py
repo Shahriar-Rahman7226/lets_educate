@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.serializers import *
-from backend.modules.users.models.models import *
+from ..models.models import *
 from external.choice_tuple import USER_ROLES, GENDER
 
 exclude_list = [
