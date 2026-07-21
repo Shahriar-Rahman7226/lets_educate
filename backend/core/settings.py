@@ -45,7 +45,7 @@ INSTALLED_LIBRARIES = [
 ]
 
 CUSTOM_APPS = [
-
+    "modules.users",
 ]
 
 # Application definition
@@ -169,7 +169,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# AUTH_USER_MODEL = 'users.User'
+AUTH_USER_MODEL = 'users.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
