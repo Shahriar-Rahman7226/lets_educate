@@ -6,24 +6,32 @@ from external.choice_tuple import USER_ROLES, GENDER, COUNTRY
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
-    def create_user(self, email=None, password=None):
+    def create_user(self, first_name=None, last_name=None, email=None, password=None):
         if not email:
             raise ValueError('Email is required')
         if password is None:
             raise ValueError('Password is required')
         email = self.normalize_email(email) if email else None
         user = self.model(email=email)
+        user = self.model(
+            first_name=first_name if first_name else None,
+            last_name=last_name if last_name else None,
+            email=email,
+        )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, first_name, last_name, email, password):
-        user = self.create_user(email, password)
+    def create_superuser(self, email, password, first_name=None, last_name=None):
+        user = self.create_user(
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            password=password,
+        )
+        user.is_staff = True
         user.is_superuser = True
         user.user_role = USER_ROLES[0][0]
-        user.is_staff = True
-        user.first_name = first_name
-        user.last_name = last_name
         user.save(using=self._db)
         return user
 
@@ -50,7 +58,7 @@ class User(AbstractBaseUser, CustomModel, PermissionsMixin):
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
-    # REQUIRED_FIELDS = ["email"]
+    REQUIRED_FIELDS = ["first_name", "last_name"]
 
     class Meta:
         db_table = 'user'
