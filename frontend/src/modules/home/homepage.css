@@ -1,0 +1,530 @@
+/* ==============================
+   HOMEPAGE GLOBAL STYLES
+============================== */
+.homepage {
+  background-color: #f4f9ff;
+  color: #001f3f;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ==============================
+   WHY SECTION
+============================== */
+.why-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 6%;
+  background: linear-gradient(90deg, #cce9f9, #a8d5f2, #5ca0d3);
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Animation Base */
+.why-content {
+  flex: 1 1 480px;
+  min-width: 300px;
+  padding-right: 40px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: transform 1s cubic-bezier(.2, .9, .2, 1), opacity 0.8s ease;
+}
+
+.why-content.slide-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Title */
+.why-content h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #001f3f;
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* Paragraph smooth pop-up */
+.why-content p {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #002b5b;
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.9s ease 0.4s, transform 0.9s ease 0.4s;
+}
+
+.why-content.slide-up p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Learn More Button */
+.learn-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #001f3f;
+  color: #00ffff;
+  border: none;
+  padding: 12px 26px;
+  border-radius: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 31, 63, 0.25);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s ease 0.7s, transform 0.9s ease 0.7s;
+}
+
+.why-content.slide-up .learn-more-btn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.learn-more-btn:hover {
+  background: #00ffff;
+  color: #001f3f;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 31, 63, 0.3);
+}
+
+.arrow-icon {
+  transition: transform 0.3s ease;
+  font-weight: bold;
+}
+
+.learn-more-btn:hover .arrow-icon {
+  transform: translateX(5px);
+}
+
+/* Image fade-in + slight float */
+.why-image-wrap {
+  flex: 1 1 420px;
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.why-content.slide-up + .why-image-wrap {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.why-image {
+  width: 100%;
+  max-width: 900px;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 44, 89, 0.25), 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.5s ease, box-shadow 0.4s ease;
+}
+
+.why-content.slide-up + .why-image-wrap .why-image {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 18px 48px rgba(0, 44, 89, 0.32), 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ==============================
+   ACADEMICS OVERVIEW
+============================== */
+.academics-overview {
+  text-align: center;
+  padding: 60px 5%;
+}
+
+.academics-overview h2 {
+  font-size: 34px;
+  color: #001f3f;
+  margin-bottom: 24px;
+}
+
+/* ==============================
+   CURRICULUM SLIDER
+============================== */
+.curriculum-controls {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.curriculum-slider {
+  display: flex;
+  gap: 40px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 30px 30px;
+  width: 100%;
+  max-width: 1300px;
+}
+
+.curriculum-slider::-webkit-scrollbar {
+  height: 0px;
+}
+
+.curriculum-slider::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+}
+
+/* Curriculum Tile */
+.curriculum-tile {
+  background: #003366;
+  color: #00ffff;
+  min-width: 300px;
+  max-width: 320px;
+  border-radius: 50px;
+  padding: 32px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.35s ease, background 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.curriculum-tile:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Tile Header and Dropdown */
+.tile-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tile-head h3 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #00ffff;
+}
+
+.dropdown-toggle {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Tile Body */
+.tile-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(.2, .9, .2, 1), opacity 0.35s ease;
+  opacity: 0;
+  margin-top: 12px;
+}
+
+.curriculum-tile.open .tile-body,
+.tile-body.show {
+  max-height: 420px;
+  opacity: 1;
+}
+
+.tile-body ul {
+  list-style: disc;
+  padding-left: 18px;
+  color: #e6f9ff;
+  margin-bottom: 12px;
+}
+
+.tile-body li {
+  margin: 6px 0;
+  font-size: 1.2rem;
+}
+
+/* Apply Button inside Tile */
+.apply-btn {
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: none;
+  margin-top: 20px;
+  background: #00ffff;
+  color: #003366;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+/* Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.06);
+  border: none;
+  width: 48px;
+  height: 70px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 50px;
+  color: #003366;
+  z-index: 5;
+  transition: background 0.25s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow:hover {
+  transform: translateY(-50%) scale(1.06);
+  background: rgba(0, 0, 0, 0.09);
+}
+
+.arrow.left {
+  left: calc(50% - 640px - 60px);
+}
+
+.arrow.right {
+  right: calc(50% - 640px - 60px);
+}
+
+@media (max-width: 1280px) {
+  .arrow.left {
+    left: 8px;
+  }
+
+  .arrow.right {
+    right: 8px;
+  }
+}
+
+/* View More Button Wrapper */
+.view-more-wrap {
+  margin-top: 20px;
+}
+
+/* ==============================
+   STATS SECTION
+============================== */
+.stats-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 120px;
+  background: linear-gradient(90deg, #001f3f, #003366);
+  padding: 60px 6%;
+  color: #fff;
+  flex-wrap: wrap;
+}
+
+.stat-box {
+  text-align: center;
+  min-width: 180px;
+}
+
+.stat-box h3 {
+  font-size: 70px;
+  color: #00ffff;
+  margin-bottom: 6px;
+}
+
+.stat-box p {
+  font-size: 25px;
+  color: #ffa94d;
+}
+
+/* ==============================
+   TESTIMONIALS
+============================== */
+.testimonials-section {
+  padding: 80px 8%;
+  text-align: center;
+  background: #f4f9ff;
+}
+
+.testimonials-section h2 {
+  font-size: 36px;
+  margin-bottom: 40px;
+  color: #001f3f;
+}
+
+.testimonial-grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.testimonial-tile {
+  background: #003366;
+  color: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  height: 200px;
+  width: 500px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.testimonial-tile:hover {
+  transform: translateY(-6px);
+}
+
+.testimonial-tile p {
+  font-style: italic;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+}
+
+.testimonial-tile span {
+  color: #ffa94d;
+  font-weight: 700;
+  display: block;
+  margin-top: 8px;
+}
+
+/* Buttons */
+.view-more-btn,
+.show-more-btn {
+  margin-top: 24px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  background: #ffa94d;
+  color: #001f3f;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-more-btn:hover,
+.show-more-btn:hover {
+  background: #00ffff;
+}
+
+/* ==============================
+   POPUP MODAL FOR CURRICULUM
+============================== */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 30, 60, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 120px;
+  z-index: 2000;
+}
+
+.popup-window {
+  background: white;
+  padding: 30px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 44, 89, 0.4);
+  color: #003366;
+  text-align: left;
+  position: relative;
+}
+
+.popup-window p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.close-popup {
+  display: block;
+  margin: 20px auto 0 auto;
+  background: #ffa94d;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.close-popup:hover {
+  background: #ff9500;
+}
+
+/* ==============================
+   RESPONSIVE TWEAKS
+============================== */
+@media (max-width: 992px) {
+  .why-section {
+    padding: 40px 5%;
+  }
+
+  .why-image {
+    height: 260px;
+    max-width: 420px;
+  }
+
+  .curriculum-slider {
+    max-width: 920px;
+  }
+
+  .curriculum-tile {
+    min-width: 280px;
+    max-width: 300px;
+  }
+
+  .stat-box h3 {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .why-section {
+    padding: 32px 4%;
+  }
+
+  .why-content {
+    padding-right: 0;
+    text-align: center;
+  }
+
+  .why-image {
+    max-width: 360px;
+    height: 220px;
+    margin-top: 18px;
+  }
+
+  .learn-more-btn {
+    font-size: 16px;
+    padding: 10px 22px;
+    margin-top: 20px;
+  }
+
+  .curriculum-slider {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .curriculum-tile {
+    min-width: 240px;
+    max-width: 260px;
+    padding: 16px;
+  }
+
+  .testimonials-section h2 {
+    font-size: 28px;
+  }
+
+  .testimonial-tile {
+    width: 320px;
+    padding: 22px;
+  }
+}

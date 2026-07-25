@@ -1,0 +1,242 @@
+/* =============================
+   Sign In Page Styling
+============================= */
+.signin-page {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(120deg, #b7e2fa, #a0d4f2, #6bb8e0, #4c9dd1);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== Center Container ===== */
+.signin-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  width: 100%;
+}
+
+/* ===== Card Box ===== */
+.signin-box {
+  background: rgba(255, 255, 255, 0.96);
+  color: #001f3f;
+  padding: 80px 120px;
+  border-radius: 32px;
+  box-shadow: 0 30px 70px rgba(0, 31, 63, 0.25);
+  width: 100%;
+  max-width: 850px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  transition: all 0.4s ease;
+}
+
+/* .signin-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 35px 90px rgba(0, 31, 63, 0.3);
+} */
+
+/* ===== Logo and Welcome ===== */
+.signin-logo {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 25px;
+  transition: transform 0.3s ease;
+}
+
+.signin-logo:hover {
+  transform: scale(1.08);
+}
+
+.welcome-text {
+  font-size: 30px;
+  font-weight: 700;
+  color: #002b5b;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+}
+
+.signin-title {
+  font-size: 26px;
+  font-weight: 500;
+  color: #004080;
+  margin-bottom: 45px;
+}
+
+/* ===== Form Styling ===== */
+.signin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.input-group {
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  color: #002b5b;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 18px 22px;
+  border: 2px solid #a8d5f2;
+  border-radius: 14px;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  outline: none;
+  background-color: #f7fbff;
+}
+
+.input-group input:focus {
+  border-color: #004080;
+  box-shadow: 0 0 0 4px rgba(0, 64, 128, 0.15);
+}
+
+/* ===== Sign In Button ===== */
+.signin-btn {
+  margin-top: 1.2rem;
+  padding: 1.1rem;
+  background: linear-gradient(90deg, #004080, #00cfff);
+  border: none;
+  border-radius: 1.2rem;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.signin-btn:hover {
+   background: linear-gradient(90deg, #00cfff, #004080);
+  transform: translateY(-3px);
+  color: white;
+  box-shadow: 0 12px 30px rgba(0, 31, 63, 0.35);
+}
+
+/* ===== Footer Links ===== */
+.signin-footer {
+  margin-top: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.signin-footer p {
+  color: #001f3f;
+  font-size: 17px;
+}
+
+/* ===== Signup Button in Footer ===== */
+.signup-link {
+  background: none;
+  border: none;
+  color: #003366;
+  font-weight: 600;
+  font-size: 17px;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.signup-link:hover {
+  color: #00cfff;
+  transform: translateY(-1px);
+}
+
+/* ===== Forgot Password Link ===== */
+.forgot-password {
+  color: #003366;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 17px;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: #00cfff;
+}
+
+/* ===== Gradient Animation ===== */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .signin-box {
+    padding: 60px 60px;
+    max-width: 90%;
+  }
+
+  .signin-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .welcome-text {
+    font-size: 24px;
+  }
+
+  .signin-title {
+    font-size: 22px;
+  }
+
+  .signin-btn {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .signin-box {
+    padding: 50px 30px;
+  }
+
+  .welcome-text {
+    font-size: 22px;
+  }
+
+  .signin-logo {
+    width: 90px;
+    height: 90px;
+  }
+
+  .signin-title {
+    font-size: 20px;
+  }
+
+  .input-group input {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+
+  .signin-btn {
+    font-size: 18px;
+    padding: 16px;
+  }
+
+  .signup-link,
+  .forgot-password {
+    font-size: 15px;
+  }
+}

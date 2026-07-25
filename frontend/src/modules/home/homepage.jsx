@@ -175,9 +175,9 @@ const Homepage = () => {
       {/* WHY SECTION */}
       <section className="why-section" ref={whyRef}>
         <div className={`why-content ${triggered.why ? "slide-up" : ""}`}>
-          <h2>Why SlightEdge Academics?</h2>
+          <h2>Why Lets Educate?</h2>
           <p>
-            At SlightEdge Academics, we focus on strong foundations, guided mentorship,
+            At Lets Educate, we focus on strong foundations, guided mentorship,
             and personalized learning strategies to ensure student excellence.
           </p>
           <button className="learn-more-btn">
@@ -186,7 +186,7 @@ const Homepage = () => {
         </div>
 
         <div className="why-image-wrap">
-          <img src={Banner} alt="Why SlightEdge Academics" className="why-image" />
+          <img src={Banner} alt="Why Lets Educate?" className="why-image" />
         </div>
       </section>
 

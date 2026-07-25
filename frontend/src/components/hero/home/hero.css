@@ -1,6 +1,6 @@
 /* ====== Hero Section ====== */
 .hero {
-  position: relative; /* important for overlay positioning */
+  position: relative; 
   width: 100%;
   height: 100vh;
   overflow: hidden;
@@ -10,19 +10,19 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.8); /* darken image for better text contrast */
+  filter: brightness(0.8); 
   transition: transform 0.5s ease;
 }
 
 /* ====== Overlay (Text + Buttons) ====== */
 .hero-overlay {
-  position: absolute; /* relative to banner */
-  top: 85%;           /* move down on banner */
+  position: absolute; 
+  top: 85%;           
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   z-index: 10;
-  width: 90%; /* responsive width */
+  width: 90%; 
 }
 
 .hero-text h1 {
@@ -103,7 +103,7 @@
   }
 
   .hero-overlay {
-    top: 65%; /* move slightly down for smaller screens */
+    top: 65%; 
   }
 
   .hero-text h1 {

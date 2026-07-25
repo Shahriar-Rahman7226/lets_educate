@@ -27,7 +27,7 @@ const Footer = () => {
         {/* Left Column */}
         <div className="footer-left">
           <div className="footer-logo-section">
-            <img src={Logo} alt="SlightEdge Academics Logo" className="footer-logo" />
+            <img src={Logo} alt="Lets Educate Logo" className="footer-logo" />
             {/* <p className="footer-tagline">
               Empowering education with personalized learning and academic excellence.
             </p> */}
@@ -36,7 +36,7 @@ const Footer = () => {
           <div className="footer-info">
             <div className="footer-contact">
               <h4>Contact Us</h4>
-              <p>Email: <a href="mailto:support@slightedgeacademics.com">support@slightedgeacademics.com</a></p>
+              <p>Email: <a href="mailto:support@letseducate.com">support@letseducate.com</a></p>
               <p>Phone (Australia): +61 123 456 789</p>
               <p>Phone (USA): +1 987 654 3210</p>
               <p>Phone (Bangladesh): +880 176 543 2109</p>
@@ -84,7 +84,7 @@ const Footer = () => {
 
       {/* ===== COPYRIGHT ===== */}
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} SlightEdge Academics. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Lets Educate. All rights reserved.</p>
       </div>
     </footer>
   );
