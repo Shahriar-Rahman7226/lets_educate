@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
-import Homepage from "./modules/homepage/homepage";
-import HomepageNavbar from "./modules/homepage/navbar/homepage_navbar";
-import HomepageFooter from "./modules/homepage/footer/homepage_footer";
+import Homepage from "./modules/home/homepage";
+import HomepageNavbar from "./components/navbar/home/homepage_navbar";
+import HomepageFooter from "./components/footer/home/homepage_footer";
 
 // ===== Layout Components =====
 const HomepageLayout = () => (

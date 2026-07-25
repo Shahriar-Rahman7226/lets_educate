@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./homepage_footer.css";
-import Logo from "../../../assets/images/logo.png";
+import Logo from "../../../assets/logo/logo.png";
 import {
   FaFacebookF,
   FaInstagram,

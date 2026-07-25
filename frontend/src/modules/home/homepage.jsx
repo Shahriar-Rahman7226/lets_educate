@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./homepage.css";
-import Hero from "./hero/hero";
+import Hero from "../../components/hero/home/hero";
 import Banner from "../../assets/images/banner.png";
 import cambridge from "../../assets/images/cambridge.png";
 import { useNavigate } from "react-router-dom";
