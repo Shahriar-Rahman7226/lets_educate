@@ -88,6 +88,8 @@ class UserResgistrationViewSet(ModelViewSet):
         else:
             data['user_id'] = "A000"
 
+      
+
         serializer = self.serializer_class(data=data)
         if serializer.is_valid(raise_exception=True):
             user_obj = serializer.save()
@@ -97,7 +99,7 @@ class UserResgistrationViewSet(ModelViewSet):
             return Response({'message': 'Admin created successfully'}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
-        
+         
 
     @extend_schema(
         examples=[
@@ -156,10 +158,13 @@ class UserResgistrationViewSet(ModelViewSet):
             last_number = int(last_tutor.user_id[1:])
             last_number += 1
             formatted_id = format(last_number, "03d") # format: trailing zeros | 3 digits | decimal/integer
+            print(formatted_id)
             data["user_id"] = f"T{formatted_id}"
         else:
             data['user_id'] = "T000"
 
+       
+        print(data['user_id'])
         serializer_class = self.get_serializer_class()
         serializer = serializer_class(data=data)
         if serializer.is_valid(raise_exception=True):
