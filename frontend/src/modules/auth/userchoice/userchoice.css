@@ -1,0 +1,200 @@
+/* ==========================================================================
+   Role Selection Glassmorphism Styling
+   Color Palette: #001f3f | #004080 | #00cfff | #a8d5f2
+   ========================================================================== */
+
+/* Page Background matching Signup Page */
+.role-selection-page {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(120deg, #b7e2fa, #a0d4f2, #6bb8e0, #4c9dd1);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+/* Glassmorphism Outer Card Container */
+.role-card-container {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 820px;
+  box-shadow: 0 20px 40px rgba(0, 31, 63, 0.15);
+  text-align: center;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Logo Alignment */
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.role-logo {
+  height: 65px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Typography */
+.role-title {
+  color: #001f3f;
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.role-subtitle {
+  color: #004080;
+  font-size: 0.98rem;
+  max-width: 580px;
+  margin: 0 auto 2.5rem auto;
+  line-height: 1.5;
+}
+
+/* Role Grid Layout */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.8rem;
+  margin-bottom: 2.2rem;
+}
+
+/* Individual Role Box */
+.role-box {
+  background: #ffffff;
+  border: 2px solid #a8d5f2;
+  border-radius: 18px;
+  padding: 2.2rem 1.5rem 1.8rem 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  outline: none;
+}
+
+.role-box:hover,
+.role-box:focus {
+  transform: translateY(-6px);
+  border-color: #00cfff;
+  box-shadow: 0 14px 28px rgba(0, 64, 128, 0.15);
+}
+
+/* Category Badge */
+.role-badge {
+  position: absolute;
+  top: -12px;
+  background: #a8d5f2;
+  color: #001f3f;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.85rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.role-badge.highlight {
+  background: #001f3f;
+  color: #00cfff;
+}
+
+/* Role Box Inner Elements */
+.role-icon-wrapper {
+  font-size: 3.2rem;
+  margin-bottom: 0.8rem;
+  line-height: 1;
+}
+
+.role-box h3 {
+  color: #001f3f;
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.role-box p {
+  color: #4a5568;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  margin-bottom: 1.6rem;
+  flex-grow: 1;
+}
+
+/* Role Action Button */
+.role-action-btn {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(90deg, #001f3f, #004080);
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.role-box:hover .role-action-btn {
+  background: linear-gradient(90deg, #004080, #00cfff);
+  color: #001f3f;
+  font-weight: 700;
+}
+
+/* Footer Sign-In Prompt */
+.signin-prompt {
+  font-size: 0.93rem;
+  color: #001f3f;
+  margin: 0;
+}
+
+.signin-link {
+  color: #004080;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.signin-link:hover {
+  color: #00cfff;
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   Responsive Adaptations
+   ========================================================================== */
+@media (max-width: 680px) {
+  .roles-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .role-card-container {
+    padding: 2.2rem 1.5rem;
+  }
+
+  .role-title {
+    font-size: 1.75rem;
+  }
+}

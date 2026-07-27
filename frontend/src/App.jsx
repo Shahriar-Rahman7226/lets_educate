@@ -3,6 +3,8 @@ import Homepage from "./modules/home/homepage";
 import HomepageNavbar from "./components/navbar/home/homepage_navbar";
 import HomepageFooter from "./components/footer/home/homepage_footer";
 import SignIn from "./modules/auth/signin/signin";
+import SignUp from "./modules/auth/signup/signup";
+import UserChoice from "./modules/auth/userchoice/userchoice";
 
 // ===== Layout Components =====
 const HomepageLayout = () => (
@@ -36,6 +38,9 @@ function App() {
       <Routes>
          {/* Auth Pages */}
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/userchoice" element={<UserChoice />} />
+
          {/* ===== Public Layout ===== */}
           <Route element={<HomepageLayout />}>
             <Route path="/" element={<Homepage />} />
