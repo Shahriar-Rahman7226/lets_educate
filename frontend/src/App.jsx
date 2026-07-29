@@ -3,7 +3,8 @@ import Homepage from "./modules/home/homepage";
 import HomepageNavbar from "./components/navbar/home/homepage_navbar";
 import HomepageFooter from "./components/footer/home/homepage_footer";
 import SignIn from "./modules/auth/signin/signin";
-import SignUp from "./modules/auth/signup/signup";
+import TutorSignUp from "./modules/auth/signup/tutor_signup";
+import StudentSignUp from "./modules/auth/signup/student_signup";
 import UserChoice from "./modules/auth/userchoice/userchoice";
 
 // ===== Layout Components =====
@@ -38,7 +39,8 @@ function App() {
       <Routes>
          {/* Auth Pages */}
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/tutor_signup" element={<TutorSignUp />} />
+           <Route path="/student_signup" element={<StudentSignUp />} />
           <Route path="/userchoice" element={<UserChoice />} />
 
          {/* ===== Public Layout ===== */}

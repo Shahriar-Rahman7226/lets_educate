@@ -242,19 +242,19 @@
 }
 
 /* ===== Sign In Link ===== */
-.signin-link {
+p.signin-footer {
   margin-top: 1.5rem;
   font-size: 1rem;
   text-align: center;
 }
 
-.signin-link a {
+.signin-link {
   color: #004080;
   text-decoration: none;
   font-weight: 600;
 }
 
-.signin-link a:hover {
+.signin-link:hover {
   color: #00cfff;
   text-decoration: underline;
 }

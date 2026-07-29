@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./signup.css";
 import logo from "../../../assets/logo/logo.png"; 
+import api from "../../../services/api";
 
 const NATIONALITY_OPTIONS = [
-  "", "Bangladeshi", "Indian", "Pakistani", "American", "British", "Other"
+  "", "Australia", "Bangladesh", "United States"
 ];
 
 const GENDER_OPTIONS = ["", "Male", "Female", "Other"];
@@ -14,10 +15,12 @@ const Signup = () => {
     last_name: "",
     email: "",
     phone_number: "",
+    additional_phone_number: "",
     nationality: "",
     dob: "",
     address: "",
     gender: "",
+    profile_image: null,
     password: "",
     confirm_password: "",
   });
@@ -33,7 +36,7 @@ const Signup = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Check if terms accepted
@@ -59,8 +62,31 @@ const Signup = () => {
       return;
     }
 
-    console.log("Form Submitted:", formData);
-    alert("Account created successfully!");
+    // Build FormData payload to handle both text fields and profile_image file upload
+    const payload = new FormData();
+    Object.keys(formData).forEach((key) => {
+      if (formData[key] !== null && formData[key] !== "") {
+        payload.append(key, formData[key]);
+      }
+    });
+
+    try {
+      const response = await api.post("users/create-tutor/", payload, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("Form Submitted Successfully:", response.data);
+      alert("Tutor account created successfully!");
+    } catch (error) {
+      console.error("Signup error:", error);
+      const errorMessage =
+        error.response?.data?.detail ||
+        error.response?.data?.message ||
+        "Failed to create account. Please try again.";
+      alert(errorMessage);
+    }
   };
 
   return (
@@ -120,11 +146,10 @@ const Signup = () => {
             />
           </div>
 
-          {/* Row 3: Phone number */}
+          {/* Row 3: phone numbers */}
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="phone_number">
-                Phone No. <span className="required">*</span>
+              <label htmlFor="phone_number">Phone Number<span className="required">*</span>
               </label>
               <input
                 id="phone_number"
@@ -132,10 +157,21 @@ const Signup = () => {
                 value={formData.phone_number}
                 onChange={handleChange}
                 placeholder="+8801XXXXXXXXX"
-                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="additional_phone_number">Additional Phone Number</label>
+              <input
+                id="additional_phone_number"
+                name="additional_phone_number"
+                value={formData.additional_phone_number}
+                onChange={handleChange}
+                placeholder="+8801XXXXXXXXX"
               />
             </div>
           </div>
+
 
           {/* Row 4: Nationality */}
           <div className="form-row">
@@ -194,7 +230,27 @@ const Signup = () => {
             </div>
           </div>
 
-          {/* Row 7: Gender */}
+           {/* Row 7: Profile Image */}
+          <div className="form-group">
+            <label htmlFor="profile_image">Profile Image<span className="required">*</span>
+            </label>
+            <div className="profile-image-box">
+              <input
+                id="profile_image"
+                name="profile_image"
+                type="file"
+                accept="image/*"
+                onChange={handleChange}
+              />
+              <span className="file-label">
+                {formData.profile_image
+                  ? formData.profile_image.name
+                  : "Choose File"}
+              </span>
+            </div>
+          </div>
+
+          {/* Row 8: Gender */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="gender">
@@ -280,8 +336,8 @@ const Signup = () => {
             Sign Up
           </button>
 
-          <p className="signin-link">
-            Already have an account? <a href="/signin">Sign In</a>
+          <p className="signin-footer">
+            Already have an account? <a className="signin-link" href="/signin">Sign In</a>
           </p>
         </form>
       </div>

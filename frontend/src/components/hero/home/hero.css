@@ -35,52 +35,60 @@
 .hero-text p {
   font-size: 1.5rem;
   color: #ffffff;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* ====== Buttons ====== */
 .hero-buttons {
   display: flex;
-  gap: 30px;
+  gap: 40px;
   justify-content: center;
   flex-wrap: wrap;
+  
 }
 
 .hero-btn {
-  padding: 12px 28px;
+  padding: 5px 20px;
   border-radius: 30px;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
-}
-
-/* Tutor button */
-.tutor-button {
-  background-color: #ffa94d;
-  color: #001f3f;
-  border: 2px solid #001f3f;
-}
-
-.tutor-button:hover {
-  background-color: #fff;
-  color: #ffa94d;
-  transform: translateY(-3px) scale(1.05);
+    margin-bottom: 3rem;
 }
 
 /* Student button */
 .student-button {
-  background-color: #001f3f;
-  color: #00ffff;
-  border: 2px solid #00ffff;
+  background-color: #ffa94d;
+  color: #001f3f;
+  border: 2px solid #001f3f;
+  width:40%;
+  /* transform: translateY(-1.5rem); */
 }
 
 .student-button:hover {
+  background-color: #fff;
+   border: 2px solid #ffa94d;
+  color: #ffa94d;
+  transform: translateY(-5px) scale(1.05);
+}
+
+/* Tutor button */
+.tutor-button {
+  background-color: #001f3f;
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  width:40%;
+
+}
+
+.tutor-button:hover {
   background-color: #00ffff;
+  border: 2px solid #001f3f;
   color: #001f3f;
-  transform: translateY(-3px) scale(1.05);
+  transform: translateY(-5px) scale(1.05);
 }
 
 /* ====== Responsive ====== */

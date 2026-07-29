@@ -7,9 +7,9 @@ USER_ROLES = (
 )
 
 GENDER = (
-    ('MALE', 'male'),
-    ('FEMALE', 'female'),
-    ('N/A', 'n/a'),
+    ('Male', 'male'),
+    ('Female', 'female'),
+    ('Other', 'other'),
 )
 
 ACTION_TYPES = (

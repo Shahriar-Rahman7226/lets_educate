@@ -6,11 +6,6 @@ import "./hero.css";
 const Hero = () => {
   const navigate = useNavigate();
 
-  const handleSignup = (e) => {
-    e.preventDefault();
-    navigate("/signup");
-  };
-
   return (
     <section className="hero">
       <img src={Hero_banner} alt="Hero Banner" className="hero-banner" />
@@ -24,11 +19,13 @@ const Hero = () => {
 
         {/* Buttons */}
         <div className="hero-buttons">
-          <button onClick={handleSignup} className="hero-btn tutor-button">
-            Become a Tutor
-          </button>
-          <button onClick={handleSignup} className="hero-btn student-button">
+          <button className="hero-btn student-button"
+          onClick={() => navigate("/student_signup")}>
             Become a Student
+          </button>
+          <button className="hero-btn tutor-button"
+          onClick={() => navigate("/tutor_signup")}>
+            Become a Tutor
           </button>
         </div>
       </div>
