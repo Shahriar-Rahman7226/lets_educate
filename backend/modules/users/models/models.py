@@ -44,7 +44,6 @@ class User(AbstractBaseUser, CustomModel, PermissionsMixin):
     email = models.EmailField(blank=True, null=True, unique=True)
     password = models.CharField(max_length=128, blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True, unique=True) 
-    additional_phone_number = models.CharField(max_length=20, blank=True, null=True, unique=True)
     address = models.TextField(blank=True, null=True) 
     dob = models.DateField(blank=True, null=True)
     profile_image = models.ImageField(upload_to='users/', blank=True, null=True)
