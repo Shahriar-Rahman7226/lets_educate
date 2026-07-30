@@ -148,7 +148,6 @@ const Signup = () => {
 
           {/* Row 3: phone numbers */}
           <div className="form-row">
-            <div className="form-group">
               <label htmlFor="phone_number">Phone Number<span className="required">*</span>
               </label>
               <input
@@ -158,18 +157,6 @@ const Signup = () => {
                 onChange={handleChange}
                 placeholder="+8801XXXXXXXXX"
               />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="additional_phone_number">Additional Phone Number</label>
-              <input
-                id="additional_phone_number"
-                name="additional_phone_number"
-                value={formData.additional_phone_number}
-                onChange={handleChange}
-                placeholder="+8801XXXXXXXXX"
-              />
-            </div>
           </div>
 
 

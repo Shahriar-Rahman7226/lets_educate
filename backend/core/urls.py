@@ -31,6 +31,7 @@ urlpatterns = [
     path('', render_index_page, name='home_page'),
     path('admin/', admin.site.urls),
     path('users/', include('modules.users.urls.urls')),
+    path('user_profile/', include('modules.user_profile.urls.urls')),
 ] + swagger_urlpatterns
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

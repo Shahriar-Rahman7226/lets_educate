@@ -1,0 +1,247 @@
+/* =============================
+   Tutor Education Page Styling
+============================= */
+.tutoreducation-page {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(120deg, #b7e2fa, #a0d4f2, #6bb8e0, #4c9dd1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #001f3f;
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.tutoreducation-card {
+  background: rgba(255, 255, 255, 0.96);
+  padding: 70px 100px;
+  border-radius: 32px;
+  box-shadow: 0 30px 70px rgba(0, 31, 63, 0.25);
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  transition: all 0.4s ease;
+}
+
+.tutoreducation-logo {
+  width: 160px;
+  height: 160px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+}
+
+.tutoreducation-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #004080;
+}
+
+.tutoreducation-subtitle {
+  font-size: 1.1rem;
+  color: #000000;
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #004080;
+  text-align: left;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* ===== Form ===== */
+.tutoreducation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+}
+
+.input-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #001f3f;
+}
+
+/* ===== Inline Checkbox ===== */
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
+  color: #001f3f;
+}
+
+.checkbox-group input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #004080;
+  border-radius: 4px;
+  background-color: #f7fbff;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+}
+
+.checkbox-group input[type="checkbox"]:hover {
+  border-color: #00b5ff;
+  box-shadow: 0 0 6px rgba(0, 181, 255, 0.3);
+}
+
+.checkbox-group input[type="checkbox"]:checked {
+  background-color: #004080;
+  border-color: #004080;
+}
+
+.checkbox-group input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: #fff;
+  font-size: 25px;
+  position: absolute;
+  top: -1px;
+  left: 3px;
+}
+
+.checkbox-group input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 64, 128, 0.2);
+}
+
+/* ===== Input Fields ===== */
+.tutoreducation-form input,
+.tutoreducation-form textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border-radius: 1.2rem;
+  border: 1.5px solid #a8d5f2;
+  background: #f7fbff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.tutoreducation-form input:focus,
+.tutoreducation-form textarea:focus {
+  border-color: #004080;
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(0, 64, 128, 0.15);
+}
+
+/* ===== File Input ===== */
+.tutoreducation-form input[type="file"] {
+  position: relative;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  cursor: pointer;
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.tutoreducation-form input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.tutoreducation-form input[type="file"]::before {
+  content: "Choose File";
+  display: inline-block;
+  background: linear-gradient(90deg, #5ca0d3, #a8d5f2);
+  color: #001f3f;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-right: 12px;
+  transition: all 0.3s ease;
+}
+
+.tutoreducation-form input[type="file"]:hover::before {
+  background: linear-gradient(90deg, #a8d5f2, #cce9f9);
+  transform: translateY(-2px);
+}
+
+/* ===== Button ===== */
+.tutoreducation-button {
+  margin-top: 1.8rem;
+  padding: 1.1rem;
+  background: linear-gradient(90deg, #004080, #00cfff);
+  border: none;
+  border-radius: 1.2rem;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tutoreducation-button:hover {
+  background: linear-gradient(90deg, #00cfff, #004080);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 31, 63, 0.35);
+}
+
+/* ===== Sign In Link ===== */
+.signin-link {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.signin-link button {
+  background: none;
+  border: none;
+  color: #004080;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.signin-link button:hover {
+  color: #00cfff;
+  text-decoration: underline;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .tutoreducation-card {
+    padding: 60px 60px;
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .tutoreducation-card {
+    padding: 45px 25px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+}

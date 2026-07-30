@@ -36,7 +36,6 @@ class UserResgistrationViewSet(ModelViewSet):
                 "last_name": "string",
                 "email": "string",
                 "phone_number": "string",
-                "additional_phone_number": "string",
                 "nationality": "string",
                  "dob": "2005-08-15",
                 "address": "string",
@@ -57,14 +56,9 @@ class UserResgistrationViewSet(ModelViewSet):
             return Response({'message': 'Email is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Phone number check
-        if self.model_class.objects.filter(Q(phone_number=data['phone_number']) | Q(additional_phone_number=data['phone_number'])).first():
+        if self.model_class.objects.filter(Q(phone_number=data['phone_number'])).first():
             return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Additional phone number check
-        if 'additional_phone_number' in data and data['additional_phone_number']:
-            if self.model_class.objects.filter(Q(phone_number=data['additional_phone_number']) | Q(additional_phone_number=data['additional_phone_number'])).first():
-                return Response({'message': 'Additional phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-
+        
         # Password check
         if 'password' in data.keys():
             try:
@@ -110,7 +104,6 @@ class UserResgistrationViewSet(ModelViewSet):
                     "last_name": "string",
                     "email": "string",
                     "phone_number": "string",
-                    "additional_phone_number": "string",
                     "nationality": "string",
                     "dob": "2005-08-15",
                     "address": "string",
@@ -131,13 +124,8 @@ class UserResgistrationViewSet(ModelViewSet):
             return Response({'message': 'Email is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Phone number check
-        if self.model_class.objects.filter(Q(phone_number=data['phone_number']) | Q(additional_phone_number=data['phone_number'])).first():
+        if self.model_class.objects.filter(Q(phone_number=data['phone_number'])).first():
             return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Additional phone number check
-        if 'additional_phone_number' in data and data['additional_phone_number']:
-            if self.model_class.objects.filter(Q(phone_number=data['additional_phone_number']) | Q(additional_phone_number=data['additional_phone_number'])).first():
-                return Response({'message': 'Additional phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Password check
         if 'password' in data.keys():
@@ -186,7 +174,6 @@ class UserResgistrationViewSet(ModelViewSet):
                 "last_name": "string",
                 "email": "string",
                 "phone_number": "string",
-                "additional_phone_number": "string",
                 "nationality": "string",
                  "dob": "2005-08-15",
                 "address": "string",
@@ -207,13 +194,8 @@ class UserResgistrationViewSet(ModelViewSet):
             return Response({'message': 'Email is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Phone number check
-        if self.model_class.objects.filter(Q(phone_number=data['phone_number']) | Q(additional_phone_number=data['phone_number'])).first():
+        if self.model_class.objects.filter(Q(phone_number=data['phone_number'])).first():
             return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Additional phone number check
-        if 'additional_phone_number' in data and data['additional_phone_number']:
-            if self.model_class.objects.filter(Q(phone_number=data['additional_phone_number']) | Q(additional_phone_number=data['additional_phone_number'])).first():
-                return Response({'message': 'Additional phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Password check
         if 'password' in data.keys():
@@ -275,7 +257,6 @@ class UserUpdateAndListViewSet(ModelViewSet):
                     "last_name": "string",
                     "email": "string",
                     "phone_number": "string",
-                    "additional_phone_number": "string",
                     "nationality": "string",
                      "dob": "2005-08-15",
                      "gender": "string",
@@ -301,14 +282,8 @@ class UserUpdateAndListViewSet(ModelViewSet):
 
         # Phone number check
         if 'phone_number' in data.keys():
-            if self.model_class.objects.filter(Q(phone_number=data['phone_number']) | Q(additional_phone_number=data['phone_number'])).first():
+            if self.model_class.objects.filter(Q(phone_number=data['phone_number'])).first():
                 return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-
-
-        # Additional phone number check
-        if 'additional_phone_number' in data.keys():
-            if self.model_class.objects.filter(Q(phone_number=data['additional_phone_number']) | Q(additional_phone_number=data['additional_phone_number'])).first():
-                return Response({'message': 'Additional phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         serializer_class = self.get_serializer_class()
         serializer = serializer_class(instance=instance, data=request.data)
