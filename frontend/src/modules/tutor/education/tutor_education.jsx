@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./tutor_education.css";
 import logo from "../../../assets/logo/logo.png";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const TutorEducation = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     secondary_institute_name: "",
@@ -336,16 +336,10 @@ const TutorEducation = () => {
           </div>
 
           <button type="submit" className="tutoreducation-button">
-            Save and Continue
+            Complete Profile
           </button>
         </form>
 
-        <div className="signin-link">
-          <p>
-            Already completed your profile?{" "}
-            <button onClick={() => navigate("/signin")}>Sign In</button>
-          </p>
-        </div>
       </div>
     </div>
   );

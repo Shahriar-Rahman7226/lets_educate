@@ -78,6 +78,12 @@
   color: #001f3f;
 }
 
+/* Required Asterisk Styling */
+.required {
+  color: #e53e3e;
+  margin-left: 2px;
+}
+
 .tutorprofile-form input,
 .tutorprofile-form select,
 .tutorprofile-form textarea {
@@ -160,11 +166,19 @@
   transition: all 0.3s ease;
 }
 
-.tutorprofile-button:hover {
+.tutorprofile-button:hover:not(:disabled) {
   background: linear-gradient(90deg, #00cfff, #004080);
   color: white;
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(0, 31, 63, 0.35);
+}
+
+/* Disabled Button State */
+.tutorprofile-button:disabled {
+   background: linear-gradient(90deg, #b0c4d8, #a8d5f2);
+  cursor: not-allowed;
+  opacity: 0.8;
+  box-shadow: none;
 }
 
 /* ===== Signin Link ===== */

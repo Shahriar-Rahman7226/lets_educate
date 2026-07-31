@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./tutor_profile.css";
 import logo from "../../../assets/logo/logo.png";
 import { useNavigate } from "react-router-dom";
+import api from "../../../services/api";
 
 const TutorProfile = () => {
   const navigate = useNavigate();
@@ -14,8 +15,9 @@ const TutorProfile = () => {
     linkedin: "",
     additional_phone_number: "",
     resume: null,
-    dob: "",
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -32,10 +34,47 @@ const TutorProfile = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  // Helper check to verify if all required fields are populated
+  const isFormValid =
+    formData.govt_id !== null &&
+    formData.overview.trim() !== "" &&
+    formData.tutoring_experience.trim() !== "" &&
+    formData.resume !== null;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Tutor Profile Data:", formData);
-    // Connect this later to backend API
+
+    if (!isFormValid) return;
+
+    setIsSubmitting(true);
+
+    const payload = new FormData();
+    Object.keys(formData).forEach((key) => {
+      if (formData[key] !== null && formData[key] !== "") {
+        payload.append(key, formData[key]);
+      }
+    });
+
+    try {
+      const response = await api.post("user_profile/tutor_profile/", payload, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      console.log("Profile updated successfully:", response.data);
+      alert("Tutor profile created successfully!");
+      navigate("/tutor_education");
+    } catch (error) {
+      console.error("Error submitting tutor profile:", error);
+      const errorMessage =
+        error.response?.data?.detail ||
+        error.response?.data?.message ||
+        "Failed to update profile. Please try again.";
+      alert(errorMessage);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -56,8 +95,11 @@ const TutorProfile = () => {
 
         {/* Form */}
         <form className="tutorprofile-form" onSubmit={handleSubmit}>
+          {/* Government ID - Required */}
           <div className="input-group">
-            <label htmlFor="govt_id">Government ID (NID/Passport)</label>
+            <label htmlFor="govt_id">
+              Government ID (NID/Passport) <span className="required">*</span>
+            </label>
             <input
               type="file"
               name="govt_id"
@@ -68,8 +110,11 @@ const TutorProfile = () => {
             />
           </div>
 
+          {/* Overview - Required */}
           <div className="input-group">
-            <label htmlFor="overview">Overview</label>
+            <label htmlFor="overview">
+              Overview <span className="required">*</span>
+            </label>
             <textarea
               name="overview"
               id="overview"
@@ -80,8 +125,11 @@ const TutorProfile = () => {
             ></textarea>
           </div>
 
+          {/* Tutoring Experience - Required */}
           <div className="input-group">
-            <label htmlFor="tutoring_experience">Tutoring Experience</label>
+            <label htmlFor="tutoring_experience">
+              Tutoring Experience <span className="required">*</span>
+            </label>
             <input
               type="text"
               name="tutoring_experience"
@@ -93,6 +141,7 @@ const TutorProfile = () => {
             />
           </div>
 
+          {/* Facebook Profile - Optional */}
           <div className="input-group">
             <label htmlFor="facebook">Facebook Profile</label>
             <input
@@ -105,6 +154,7 @@ const TutorProfile = () => {
             />
           </div>
 
+          {/* LinkedIn Profile - Optional */}
           <div className="input-group">
             <label htmlFor="linkedin">LinkedIn Profile</label>
             <input
@@ -117,8 +167,11 @@ const TutorProfile = () => {
             />
           </div>
 
+          {/* Additional Phone Number - Optional */}
           <div className="input-group">
-            <label htmlFor="additional_phone_number">Additional Phone Number</label>
+            <label htmlFor="additional_phone_number">
+              Additional Phone Number
+            </label>
             <input
               type="tel"
               name="additional_phone_number"
@@ -126,12 +179,14 @@ const TutorProfile = () => {
               placeholder="Enter an alternative contact number"
               value={formData.additional_phone_number}
               onChange={handleChange}
-              required
             />
           </div>
 
+          {/* Resume - Required */}
           <div className="input-group">
-            <label htmlFor="resume">Resume / CV (PDF or Image)</label>
+            <label htmlFor="resume">
+              Resume (PDF or Image) <span className="required">*</span>
+            </label>
             <input
               type="file"
               name="resume"
@@ -142,17 +197,14 @@ const TutorProfile = () => {
             />
           </div>
 
-          <button type="submit" className="tutorprofile-button">
-            Complete Profile
+          <button
+            type="submit"
+            className="tutorprofile-button"
+            disabled={!isFormValid || isSubmitting}
+          >
+            {isSubmitting ? "Submitting..." : "Continue to Education Details"}
           </button>
         </form>
-
-        <div className="signin-link">
-          <p>
-            Already completed your profile?{" "}
-            <button onClick={() => navigate("/signin")}>Sign In</button>
-          </p>
-        </div>
       </div>
     </div>
   );
