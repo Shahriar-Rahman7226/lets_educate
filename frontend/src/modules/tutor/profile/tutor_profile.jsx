@@ -13,33 +13,24 @@ const TutorProfile = () => {
     tutoring_experience: "",
     facebook: "",
     linkedin: "",
-    additional_phone_number: "",
-    resume: null,
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    if (files) {
-      setFormData({
-        ...formData,
-        [name]: files[0],
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value,
-      });
-    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: files ? files[0] : value,
+    }));
   };
 
-  // Helper check to verify if all required fields are populated
+  // Check if all required fields are populated
   const isFormValid =
     formData.govt_id !== null &&
     formData.overview.trim() !== "" &&
-    formData.tutoring_experience.trim() !== "" &&
-    formData.resume !== null;
+    formData.tutoring_experience.trim() !== "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,28 +40,35 @@ const TutorProfile = () => {
     setIsSubmitting(true);
 
     const payload = new FormData();
-    Object.keys(formData).forEach((key) => {
-      if (formData[key] !== null && formData[key] !== "") {
-        payload.append(key, formData[key]);
+
+    Object.entries(formData).forEach(([key, value]) => {
+      if (value !== null && value !== "") {
+        payload.append(key, value);
       }
     });
 
     try {
-      const response = await api.post("user_profile/tutor_profile/", payload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await api.post(
+        "user_profile/tutor-profile/",
+        payload,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
-      console.log("Profile updated successfully:", response.data);
+      console.log("Profile created successfully:", response.data);
       alert("Tutor profile created successfully!");
       navigate("/tutor_education");
     } catch (error) {
       console.error("Error submitting tutor profile:", error);
+
       const errorMessage =
         error.response?.data?.detail ||
         error.response?.data?.message ||
-        "Failed to update profile. Please try again.";
+        "Failed to create profile. Please try again.";
+
       alert(errorMessage);
     } finally {
       setIsSubmitting(false);
@@ -83,7 +81,7 @@ const TutorProfile = () => {
         {/* Logo */}
         <img
           src={logo}
-          alt="Slight Edge Academics Logo"
+          alt="Lets Educate Logo"
           className="tutorprofile-logo"
         />
 
@@ -95,45 +93,46 @@ const TutorProfile = () => {
 
         {/* Form */}
         <form className="tutorprofile-form" onSubmit={handleSubmit}>
-          {/* Government ID - Required */}
+          {/* Government ID */}
           <div className="input-group">
             <label htmlFor="govt_id">
-              Government ID (NID/Passport) <span className="required">*</span>
+              Government ID (NID/Passport){" "}
+              <span className="required">*</span>
             </label>
             <input
               type="file"
-              name="govt_id"
               id="govt_id"
+              name="govt_id"
               accept="image/*,.pdf"
               onChange={handleChange}
               required
             />
           </div>
 
-          {/* Overview - Required */}
+          {/* Overview */}
           <div className="input-group">
             <label htmlFor="overview">
               Overview <span className="required">*</span>
             </label>
             <textarea
-              name="overview"
               id="overview"
+              name="overview"
               placeholder="Write a short introduction about yourself..."
               value={formData.overview}
               onChange={handleChange}
               required
-            ></textarea>
+            />
           </div>
 
-          {/* Tutoring Experience - Required */}
+          {/* Tutoring Experience */}
           <div className="input-group">
             <label htmlFor="tutoring_experience">
               Tutoring Experience <span className="required">*</span>
             </label>
             <input
               type="text"
-              name="tutoring_experience"
               id="tutoring_experience"
+              name="tutoring_experience"
               placeholder="e.g., 3 years teaching Mathematics"
               value={formData.tutoring_experience}
               onChange={handleChange}
@@ -141,59 +140,29 @@ const TutorProfile = () => {
             />
           </div>
 
-          {/* Facebook Profile - Optional */}
+          {/* Facebook */}
           <div className="input-group">
             <label htmlFor="facebook">Facebook Profile</label>
             <input
               type="url"
-              name="facebook"
               id="facebook"
+              name="facebook"
               placeholder="Enter your Facebook profile link"
               value={formData.facebook}
               onChange={handleChange}
             />
           </div>
 
-          {/* LinkedIn Profile - Optional */}
+          {/* LinkedIn */}
           <div className="input-group">
             <label htmlFor="linkedin">LinkedIn Profile</label>
             <input
               type="url"
-              name="linkedin"
               id="linkedin"
+              name="linkedin"
               placeholder="Enter your LinkedIn profile link"
               value={formData.linkedin}
               onChange={handleChange}
-            />
-          </div>
-
-          {/* Additional Phone Number - Optional */}
-          <div className="input-group">
-            <label htmlFor="additional_phone_number">
-              Additional Phone Number
-            </label>
-            <input
-              type="tel"
-              name="additional_phone_number"
-              id="additional_phone_number"
-              placeholder="Enter an alternative contact number"
-              value={formData.additional_phone_number}
-              onChange={handleChange}
-            />
-          </div>
-
-          {/* Resume - Required */}
-          <div className="input-group">
-            <label htmlFor="resume">
-              Resume (PDF or Image) <span className="required">*</span>
-            </label>
-            <input
-              type="file"
-              name="resume"
-              id="resume"
-              accept=".pdf,image/*"
-              onChange={handleChange}
-              required
             />
           </div>
 
@@ -202,7 +171,9 @@ const TutorProfile = () => {
             className="tutorprofile-button"
             disabled={!isFormValid || isSubmitting}
           >
-            {isSubmitting ? "Submitting..." : "Continue to Education Details"}
+            {isSubmitting
+              ? "Submitting..."
+              : "Continue to Education Details"}
           </button>
         </form>
       </div>

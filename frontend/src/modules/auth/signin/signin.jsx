@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./signin.css";
-import logo from "../../../assets/logo/logo.png"; 
+import logo from "../../../assets/logo/logo.png";
+import api from "../../../services/api";
 import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
@@ -17,10 +18,60 @@ const SignIn = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Signing in with:", formData);
-    // Connect this later to your backend API
+
+    try {
+      const response = await api.post("authentication/login/", formData);
+      const data = response.data;
+
+      // Temporary: Check backend response
+      console.log(data);
+
+      // Save tokens to localStorage
+      if (data.access) {
+        localStorage.setItem("access_token", data.access);
+      }
+      if (data.refresh) {
+        localStorage.setItem("refresh_token", data.refresh);
+      }
+
+      // Check role and redirect accordingly
+      const role = data.user_role;
+      const isProfileCompleted = data.is_profile_completed;
+      const isEducationCompleted = data.is_education_completed;
+
+      if (role === "TUTOR") {
+        if (!isProfileCompleted) {
+          navigate("/tutor_profile");
+        } else if (!isEducationCompleted) {
+          navigate("/tutor_education");
+        } else {
+          navigate("/tutor_dashboard");
+        }
+      } else if (role === "STUDENT") {
+        if (!isProfileCompleted) {
+          navigate("/student_profile");
+        } else {
+          navigate("/student_dashboard");
+        }
+      } else if (role === "ADMIN") {
+        navigate("/admin_dashboard");
+      } else {
+        // Fallback default redirect if role is unknown
+        navigate("/");
+      }
+
+    } catch (error) {
+      console.error("Sign in error:", error);
+
+      const errorMessage =
+        error.response?.data?.detail ||
+        error.response?.data?.message ||
+        "Invalid email or password. Please try again.";
+
+      alert(errorMessage);
+    }
   };
 
   return (
@@ -76,14 +127,15 @@ const SignIn = () => {
           {/* Footer Links */}
           <div className="signin-footer">
             <p>
-                Haven’t registered yet?{" "}
-                <button
-                    className="signup-link"
-                    onClick={() => navigate("/userchoice")}
-                >
-                        Sign Up
-                </button> 
+              Haven’t registered yet?{" "}
+              <button
+                className="signup-link"
+                onClick={() => navigate("/userchoice")}
+              >
+                Sign Up
+              </button>
             </p>
+
             <a href="/forgot-password" className="forgot-password">
               Forgot Password?
             </a>

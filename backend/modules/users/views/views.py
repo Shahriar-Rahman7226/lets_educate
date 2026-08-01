@@ -16,6 +16,7 @@ from external.decorators import allowed_users
 from external.query_helper import get_query_data
 from django.db.models import Q
 from external.choice_tuple import USER_ROLES
+from modules.authentication.views.views import *
 
 
 @extend_schema(tags=['User Registration'])
@@ -36,8 +37,9 @@ class UserResgistrationViewSet(ModelViewSet):
                 "last_name": "string",
                 "email": "string",
                 "phone_number": "string",
-                "nationality": "string",
-                 "dob": "2005-08-15",
+                "additional_phone_number": "string",
+                "country": "string",
+                "district": "string",
                 "address": "string",
                 "gender": "string",
                 "profile_image": "file",
@@ -56,8 +58,13 @@ class UserResgistrationViewSet(ModelViewSet):
             return Response({'message': 'Email is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Phone number check
-        if self.model_class.objects.filter(Q(phone_number=data['phone_number'])).first():
+        if self.model_class.objects.filter(Q(phone_number=data['phone_number']) | Q(additional_phone_number=data['phone_number'])).first():
             return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Additional phone number check
+        if 'additional_phone_number' in data and data['additional_phone_number']:
+            if self.model_class.objects.filter(Q(phone_number=data['additional_phone_number']) | Q(additional_phone_number=data['additional_phone_number'])).first():
+                return Response({'message': 'Additional phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
         
         # Password check
         if 'password' in data.keys():
@@ -104,8 +111,9 @@ class UserResgistrationViewSet(ModelViewSet):
                     "last_name": "string",
                     "email": "string",
                     "phone_number": "string",
-                    "nationality": "string",
-                    "dob": "2005-08-15",
+                    "additional_phone_number": "string",
+                    "country": "string",
+                    "district": "string",
                     "address": "string",
                     "gender": "string",
                     "profile_image": "file",
@@ -117,15 +125,24 @@ class UserResgistrationViewSet(ModelViewSet):
     )
     @transaction.atomic()
     def create_tutor(self, request, *args, **kwargs):
-        data = request.data.copy()
+        data = request.data.dict()
+
+        # Preserve uploaded file(s)
+        for key, file in request.FILES.items():
+            data[key] = file
 
         # Email Check
         if self.model_class.objects.filter(email=data['email']).first():
             return Response({'message': 'Email is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Phone number check
-        if self.model_class.objects.filter(Q(phone_number=data['phone_number'])).first():
+        if self.model_class.objects.filter(Q(phone_number=data['phone_number']) | Q(additional_phone_number=data['phone_number'])).first():
             return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Additional phone number check
+        if 'additional_phone_number' in data and data['additional_phone_number']:
+            if self.model_class.objects.filter(Q(phone_number=data['additional_phone_number']) | Q(additional_phone_number=data['additional_phone_number'])).first():
+                return Response({'message': 'Additional phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Password check
         if 'password' in data.keys():
@@ -134,33 +151,36 @@ class UserResgistrationViewSet(ModelViewSet):
                 data['password'] = make_password(data['password'])
             except ValidationError:
                 return Response({'message': 'Given password is too weak.'}, status=status.HTTP_400_BAD_REQUEST)
-            
+
         data['user_role'] = USER_ROLES[2][0]
-        
-         # Generate Tutor User ID
+
+        # Generate Tutor User ID
         last_tutor = self.model_class.objects.filter(
             user_role=USER_ROLES[2][0]
         ).order_by('-user_id').first()
-        
+
         if last_tutor and last_tutor.user_id:
             last_number = int(last_tutor.user_id[1:])
             last_number += 1
-            formatted_id = format(last_number, "03d") # format: trailing zeros | 3 digits | decimal/integer
+            formatted_id = format(last_number, "03d")
             print(formatted_id)
             data["user_id"] = f"T{formatted_id}"
         else:
             data['user_id'] = "T000"
 
-       
         print(data['user_id'])
+
         serializer_class = self.get_serializer_class()
         serializer = serializer_class(data=data)
+
         if serializer.is_valid(raise_exception=True):
             user_obj = serializer.save()
+
             subject = 'Lets Educate'
             message = 'Thankyou for registering with us!'
             send_email(user_obj.id, subject, message, None)
-            return Response({'message': 'Tutor created successfully'}, status=status.HTTP_201_CREATED)
+
+            return Response({'message': 'Tutor created successfully..'}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
@@ -174,8 +194,9 @@ class UserResgistrationViewSet(ModelViewSet):
                 "last_name": "string",
                 "email": "string",
                 "phone_number": "string",
-                "nationality": "string",
-                 "dob": "2005-08-15",
+                "additional_phone_number": "string",
+                "country": "string",
+                "district": "string",
                 "address": "string",
                 "gender": "string",
                 "profile_image": "file",
@@ -194,8 +215,13 @@ class UserResgistrationViewSet(ModelViewSet):
             return Response({'message': 'Email is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Phone number check
-        if self.model_class.objects.filter(Q(phone_number=data['phone_number'])).first():
+        if self.model_class.objects.filter(Q(phone_number=data['phone_number']) | Q(additional_phone_number=data['phone_number'])).first():
             return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Additional phone number check
+        if 'additional_phone_number' in data and data['additional_phone_number']:
+            if self.model_class.objects.filter(Q(phone_number=data['additional_phone_number']) | Q(additional_phone_number=data['additional_phone_number'])).first():
+                return Response({'message': 'Additional phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Password check
         if 'password' in data.keys():
@@ -227,8 +253,7 @@ class UserResgistrationViewSet(ModelViewSet):
             subject = 'Lets Educate'
             message = 'Thankyou for registering with us!'
             send_email(user_obj.id, subject, message, None)
-            return Response({'message': 'Student'
-            ' created successfully'}, status=status.HTTP_201_CREATED)
+            return Response({'message': 'Student created successfully'}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -253,14 +278,15 @@ class UserUpdateAndListViewSet(ModelViewSet):
             OpenApiExample(
                 "Update User",
                 value={
-                    "first_name": "string",
+                   "first_name": "string",
                     "last_name": "string",
                     "email": "string",
                     "phone_number": "string",
-                    "nationality": "string",
-                     "dob": "2005-08-15",
-                     "gender": "string",
+                    "additional_phone_number": "string",
+                    "country": "string",
+                    "district": "string",
                     "address": "string",
+                    "gender": "string",
                     "profile_image": "file",
                 },
                 request_only=True,
@@ -281,9 +307,13 @@ class UserUpdateAndListViewSet(ModelViewSet):
                 return Response({'message': 'Email is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Phone number check
-        if 'phone_number' in data.keys():
-            if self.model_class.objects.filter(Q(phone_number=data['phone_number'])).first():
-                return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
+        if self.model_class.objects.filter(Q(phone_number=data['phone_number']) | Q(additional_phone_number=data['phone_number'])).first():
+            return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Additional phone number check
+        if 'additional_phone_number' in data and data['additional_phone_number']:
+            if self.model_class.objects.filter(Q(phone_number=data['additional_phone_number']) | Q(additional_phone_number=data['additional_phone_number'])).first():
+                return Response({'message': 'Additional phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
 
         serializer_class = self.get_serializer_class()
         serializer = serializer_class(instance=instance, data=request.data)

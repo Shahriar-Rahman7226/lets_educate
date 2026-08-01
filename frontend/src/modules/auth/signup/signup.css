@@ -243,7 +243,7 @@
 
 /* ===== Sign In Link ===== */
 p.signin-footer {
-  margin-top: 1.5rem;
+  margin-top: 10px;
   font-size: 1rem;
   text-align: center;
 }

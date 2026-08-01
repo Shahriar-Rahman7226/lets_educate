@@ -32,15 +32,10 @@ class StudentProfileViewSet(ModelViewSet):
             OpenApiExample(
                 "Create Student Profile",
                 value={
-                "institute": "string",
+                "institute_name": "string",
                 "institute_id": "file",
                 "curriculum": "string",
-                "curriculum_level": "string",
                 "overview": "string",
-                "guardian_name": "string",
-                "relation_with_guardian": "string",
-                "guardian_number": "string",
-                "guardian_email": "string",
                 },
                 request_only=True,
             )
@@ -50,22 +45,17 @@ class StudentProfileViewSet(ModelViewSet):
     @allowed_users(allowed_roles=['STUDENT'])
     def create(self, request, *args, **kwargs):
         data=request.data.copy()
-
-        # Guardian Email check
-        if 'guardian_email' in data.keys():
-            if self.model_class.objects.filter(guardian_email=data['guardian_email']).first():
-                return Response({'message': 'Email is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Guardian Phone Number check
-        if 'guardian_number' in data.keys():
-            if self.model_class.objects.filter(guardian_number=data['guardian_number']).first():
-                return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
             
         data['user'] = request.user.id
         serializer_class = self.get_serializer_class()
         serializer = serializer_class(data=data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
+            instance = serializer.save()
+             # Fetching the user using the foreign key relationship and updating the status
+            user = instance.user
+            user.is_profile_completed = True
+            user.save(update_fields=['is_profile_completed'])
+            
             return Response({'message': 'Student profile created successfully'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -75,15 +65,10 @@ class StudentProfileViewSet(ModelViewSet):
             OpenApiExample(
                 "Update Student Profile",
                 value={
-                "institute": "string",
+                "institute_name": "string",
                 "institute_id": "file",
                 "curriculum": "string",
-                "curriculum_level": "string",
                 "overview": "string",
-                "guardian_name": "string",
-                "relation_with_guardian": "string",
-                "guardian_number": "string",
-                "guardian_email": "string",
                 "reason_for_update": "string",
                 "is_approved": False,
                 },
@@ -100,18 +85,8 @@ class StudentProfileViewSet(ModelViewSet):
             return Response({'message': 'Student Profile does not exists'}, status=status.HTTP_400_BAD_REQUEST)
         
          # Reason for update required for Student
-        if request.user.user_role == USER_ROLES[4][0] and not data.get('reason_for_update'):
+        if request.user.user_role == USER_ROLES[3][0] and not data.get('reason_for_update'):
                 return Response({'message': 'Please provide a reason for your update.'}, status=status.HTTP_400_BAD_REQUEST)
-    
-        # Guardian Email check
-        if 'guardian_email' in data.keys():
-            if self.model_class.objects.filter(guardian_email=data['guardian_email']).first():
-                return Response({'message': 'Email is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        # Guardian Phone Number check
-        if 'guardian_number' in data.keys():
-            if self.model_class.objects.filter(guardian_number=data['guardian_number']).first():
-                return Response({'message': 'Phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
         
         serializer_class = self.get_serializer_class()
         serializer = serializer_class(instance=instance, data=data)
@@ -157,38 +132,44 @@ class TutorProfileViewSet(ModelViewSet):
         return self.serializer_class
     
     @extend_schema(
-        examples=[
-            OpenApiExample(
-                "Create Tutor Profile",
-                value={
-                "govt_id": "file", 
+    examples=[
+        OpenApiExample(
+            "Create Tutor Profile",
+            value={
+                "govt_id": "file",
                 "overview": "string",
-                "tutoring_experience": "string", 
-                "facebook": "string", 
+                "tutoring_experience": "string",
+                "facebook": "string",
                 "linkedin": "string",
-                "additional_phone_number": "string",
-                "resume": "file",  
-                },
-                request_only=True,
-            )
-        ],
+            },
+            request_only=True,
+        )
+    ],
     )
     @transaction.atomic()
     @allowed_users(allowed_roles=['TUTOR'])
     def create(self, request, *args, **kwargs):
-        data=request.data.copy()
+        data = request.data.dict()
 
-        # Additional phone number check
-        if 'additional_phone_number' in data.keys():
-            if self.model_class.objects.filter(Q(user__phone_number=data['additional_phone_number']) | Q(additional_phone_number=data['additional_phone_number'])).first():
-                return Response({'message': 'Additional phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
-            
+        # Preserve uploaded file(s)
+        for key, file in request.FILES.items():
+            data[key] = file
+
         data['user'] = request.user.id
         serializer_class = self.get_serializer_class()
         serializer = serializer_class(data=data)
+
         if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response({'message': 'Tutor profile created successfully'}, status=status.HTTP_201_CREATED)
+            instance = serializer.save()
+            # Fetching the user using the foreign key relationship and updating the status
+            user = instance.user
+            user.is_profile_completed = True
+            user.save(update_fields=['is_profile_completed'])
+
+            return Response(
+                {'message': 'Tutor profile created successfully'},
+                status=status.HTTP_201_CREATED
+            )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -197,13 +178,11 @@ class TutorProfileViewSet(ModelViewSet):
             OpenApiExample(
                 "Update Tutor Profile",
                 value={
-                 "govt_id": "file", 
+                "govt_id": "file", 
                 "overview": "string",
                 "tutoring_experience": "string", 
                 "facebook": "string", 
                 "linkedin": "string",
-                "additional_phone_number": "string",
-                "resume": "file",  
                 "reason_for_update": "string",
                  "is_approved": False,
                 },
@@ -218,14 +197,9 @@ class TutorProfileViewSet(ModelViewSet):
         instance = self.model_class.objects.filter(id=kwargs['id']).first()
         if not instance:
             return Response({'message': 'Tutor Profile does not exists'}, status=status.HTTP_400_BAD_REQUEST)
-
-         # Additional phone number check
-        if 'additional_phone_number' in data.keys():
-            if self.model_class.objects.filter(Q(user__phone_number=data['additional_phone_number']) | Q(additional_phone_number=data['additional_phone_number'])).first():
-                return Response({'message': 'Additional phone number is already in use.'}, status=status.HTTP_400_BAD_REQUEST)
                     
          # Reason for update required for Tutor
-        if request.user.user_role == USER_ROLES[3][0] and not data.get('reason_for_update'):
+        if request.user.user_role == USER_ROLES[2][0] and not data.get('reason_for_update'):
                 return Response({'message': 'Please provide a reason for your update.'}, status=status.HTTP_400_BAD_REQUEST)
         
         serializer_class = self.get_serializer_class()
@@ -276,30 +250,33 @@ class TutorEducationViewSet(ModelViewSet):
             OpenApiExample(
                 "Create Tutor Education",
                 value={
-                    "secondary_institute_name": "string", 
-                    "secondary_degree": "string", 
-                    "secondary_id": "file", 
+                    "secondary_curriculum": "string", 
+                    "secondary_institute_name": "string",
                     "secondary_result": "string", 
                     "secondary_certificate": "file", 
-                    "secondary_passing_year": "2005-08-15", 
-                    "secondary_curriculum": "string", 
-                    "currently_at_secondary": False, 
-                    
+                    "secondary_passing_year": "2026", 
+
+                    "higher_secondary_curriculum": "string",
                     "higher_secondary_institute_name": "string", 
-                    "higher_secondary_degree": "string",
-                    "higher_secondary_id": "file", 
                     "higher_secondary_result": "string", 
                     "higher_secondary_certificate": "file", 
-                    "higher_secondary_passing_year": "2005-08-15", 
-                    "higher_secondary_curriculum": "string",
-                    "currently_at_higher_secondary": False, 
+                    "higher_secondary_passing_year": "2026",  
                     
                     "bachelors_institute_name": "string", 
+                    "bachelors_field_of_study": "string",
                     "bachelors_id": "file", 
                     "bachelors_result": "string", 
                     "bachelors_certificate": "file", 
-                    "bachelors_passing_year": "2005-08-15", 
-                    "currently_at_bachelors": False,
+                    "bachelors_passing_year": "2026", 
+
+                    "masters_institute_name": "string",
+                    "masters_field_of_study": "string", 
+                    "masters_id": "file", 
+                    "masters_result": "string", 
+                    "masters_certificate": "file", 
+                    "masters_passing_year": "2026",
+
+                    "current_education_level": "string", 
                 },
                 request_only=True,
             )
@@ -319,6 +296,11 @@ class TutorEducationViewSet(ModelViewSet):
         serializer = serializer_class(data=data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
+            # Accessing the user via the profile instance foreign key and updating the status
+            user = profile_instance.user
+            user.is_education_completed = True
+            user.save(update_fields=['is_education_completed'])
+
             return Response({'message': 'Tutor Education created successfully'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -328,31 +310,33 @@ class TutorEducationViewSet(ModelViewSet):
             OpenApiExample(
                 "Update Tutor Education",
                 value={
-                    "secondary_institute_name": "string", 
-                    "secondary_degree": "string", 
-                    "secondary_id": "file", 
+                    "secondary_curriculum": "string", 
+                    "secondary_institute_name": "string",
                     "secondary_result": "string", 
                     "secondary_certificate": "file", 
-                    "secondary_passing_year": "2005-08-15", 
-                    "secondary_curriculum": "string", 
-                    "currently_at_secondary": False, 
-                    
+                    "secondary_passing_year": "2026", 
+
+                    "higher_secondary_curriculum": "string",
                     "higher_secondary_institute_name": "string", 
-                    "higher_secondary_degree": "string",
-                    "higher_secondary_id": "file", 
                     "higher_secondary_result": "string", 
                     "higher_secondary_certificate": "file", 
-                    "higher_secondary_passing_year": "2005-08-15", 
-                    "higher_secondary_curriculum": "string",
-                    "currently_at_higher_secondary": False, 
+                    "higher_secondary_passing_year": "2026",  
                     
                     "bachelors_institute_name": "string", 
+                    "bachelors_field_of_study": "string",
                     "bachelors_id": "file", 
                     "bachelors_result": "string", 
                     "bachelors_certificate": "file", 
-                    "bachelors_passing_year": "2005-08-15", 
-                    "currently_at_bachelors": False,
+                    "bachelors_passing_year": "2026", 
 
+                    "masters_institute_name": "string", 
+                    "masters_field_of_study": "string",
+                    "masters_id": "file", 
+                    "masters_result": "string", 
+                    "masters_certificate": "file", 
+                    "masters_passing_year": "2026",
+
+                    "current_education_level": "string", 
                     "reason_for_update": "string",
                     "is_approved": False,
                 },
@@ -369,7 +353,7 @@ class TutorEducationViewSet(ModelViewSet):
             return Response({'message': 'Tutor Education does not exists'}, status=status.HTTP_400_BAD_REQUEST)
         
          # Reason for update required for Tutor Education
-        if request.user.user_role == USER_ROLES[3][0] and not data.get('reason_for_update'):
+        if request.user.user_role == USER_ROLES[2][0] and not data.get('reason_for_update'):
                 return Response({'message': 'Please provide a reason for your update.'}, status=status.HTTP_400_BAD_REQUEST)
         
         serializer_class = self.get_serializer_class()

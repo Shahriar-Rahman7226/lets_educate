@@ -47,6 +47,7 @@ INSTALLED_LIBRARIES = [
 CUSTOM_APPS = [
     "modules.users",
     "modules.user_profile",
+    "modules.authentication"
 ]
 
 # Application definition

@@ -1,0 +1,233 @@
+/* =============================
+   Student Profile Page Styling
+============================= */
+.studentprofile-page {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(120deg, #b7e2fa, #a0d4f2, #6bb8e0, #4c9dd1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #001f3f;
+  background-size: 400% 400%;
+  animation: gradientShift 12s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.studentprofile-card {
+  background: rgba(255, 255, 255, 0.96);
+  padding: 80px 120px;
+  border-radius: 32px;
+  box-shadow: 0 30px 70px rgba(0, 31, 63, 0.25);
+  width: 100%;
+  max-width: 850px;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  transition: all 0.4s ease;
+}
+
+.studentprofile-logo {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.studentprofile-logo:hover {
+  transform: scale(1.05);
+}
+
+/* Titles */
+.studentprofile-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #004080;
+}
+
+.studentprofile-subtitle {
+  font-size: 20px;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 45px;
+}
+
+/* Form */
+.studentprofile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+}
+
+.input-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #001f3f;
+}
+
+/* Required Asterisk Styling */
+.required {
+  color: #e53e3e;
+  margin-left: 2px;
+}
+
+.studentprofile-form input,
+.studentprofile-form select,
+.studentprofile-form textarea {
+  width: 100%;
+  padding: 1rem 1.2rem;
+  border-radius: 1.2rem;
+  border: 1.5px solid #a8d5f2;
+  background: #f7fbff;
+  transition: 0.3s ease;
+  font-size: 1rem;
+}
+
+.studentprofile-form input:focus,
+.studentprofile-form select:focus,
+.studentprofile-form textarea:focus {
+  border-color: #004080;
+  outline: none;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(0, 64, 128, 0.15);
+}
+
+.studentprofile-form textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+/* ===== File Input Styling ===== */
+.studentprofile-form input[type="file"] {
+  position: relative;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.studentprofile-form input[type="file"]::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.studentprofile-form input[type="file"]::before {
+  content: "Choose File";
+  display: inline-block;
+  background: linear-gradient(90deg, #5ca0d3, #a8d5f2);
+  color: #001f3f;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  margin-right: 12px;
+  transition: all 0.3s ease;
+}
+
+.studentprofile-form input[type="file"]:hover::before {
+  background: linear-gradient(90deg, #a8d5f2, #cce9f9);
+  transform: translateY(-2px);
+}
+
+.studentprofile-form input[type="file"]:active::before {
+  transform: scale(0.97);
+}
+
+.studentprofile-form input[type="file"]::file-selector-button {
+  display: none;
+}
+
+/* ===== Button ===== */
+.studentprofile-button {
+  margin-top: 1.2rem;
+  padding: 1.1rem;
+  background: linear-gradient(90deg, #004080, #00cfff);
+  border: none;
+  border-radius: 1.2rem;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.studentprofile-button:hover:not(:disabled) {
+  background: linear-gradient(90deg, #00cfff, #004080);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0, 31, 63, 0.35);
+}
+
+/* Disabled Button State */
+.studentprofile-button:disabled {
+   background: linear-gradient(90deg, #b0c4d8, #a8d5f2);
+  cursor: not-allowed;
+  opacity: 0.8;
+  box-shadow: none;
+}
+
+/* ===== Signin Link ===== */
+.signin-link {
+  margin-top: 1.5rem;
+  font-size: 1rem;
+}
+
+.signin-link button {
+  background: none;
+  border: none;
+  color: #004080;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signin-link button:hover {
+  color: #00cfff;
+  text-decoration: underline;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .studentprofile-card {
+    padding: 60px 60px;
+    max-width: 90%;
+  }
+
+  .studentprofile-logo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .studentprofile-title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .studentprofile-card {
+    padding: 50px 30px;
+  }
+
+  .studentprofile-logo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .studentprofile-title {
+    font-size: 1.5rem;
+  }
+}

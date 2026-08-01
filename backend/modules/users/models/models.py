@@ -1,7 +1,7 @@
 from django.contrib.auth.models import PermissionsMixin, BaseUserManager, AbstractBaseUser
 from django.db import models
 from abstract.base_model import CustomModel
-from external.choice_tuple import USER_ROLES, GENDER, COUNTRY
+from external.choice_tuple import USER_ROLES, GENDER, COUNTRY, DISTRICT
 
 
 # Create your models here.
@@ -39,16 +39,19 @@ class CustomUserManager(BaseUserManager):
 class User(AbstractBaseUser, CustomModel, PermissionsMixin):
     first_name = models.CharField(max_length=50, blank=True, null=True)
     last_name = models.CharField(max_length=50, blank=True, null=True)
-    user_id = models.CharField(max_length=8, blank=True, null=True)
-    nationality = models.CharField(max_length=100, blank=True, null=True, choices=COUNTRY)
+    user_id = models.CharField(max_length=20, blank=True, null=True)
+    country = models.CharField(max_length=100, blank=True, null=True, choices=COUNTRY)
+    district = models.CharField(max_length=100, blank=True, null=True, choices=DISTRICT)
     email = models.EmailField(blank=True, null=True, unique=True)
     password = models.CharField(max_length=128, blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True, unique=True) 
+    additional_phone_number = models.CharField(max_length=20, blank=True, null=True, unique=True) 
     address = models.TextField(blank=True, null=True) 
-    dob = models.DateField(blank=True, null=True)
     profile_image = models.ImageField(upload_to='users/', blank=True, null=True)
     gender = models.CharField (max_length=50, blank=True, null=True, choices=GENDER)
     user_role = models.CharField(max_length=50, blank=True, null=True, choices=USER_ROLES)
+    is_profile_completed = models.BooleanField(default=False)
+    is_education_completed = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     two_factor = models.BooleanField(default=False)
     login_attempt = models.PositiveIntegerField(default=0, blank=True, null=True)

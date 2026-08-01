@@ -8,6 +8,7 @@ import StudentSignUp from "./modules/auth/signup/student_signup";
 import UserChoice from "./modules/auth/userchoice/userchoice";
 import TutorProfile from "./modules/tutor/profile/tutor_profile";
 import TutorEducation from "./modules/tutor/education/tutor_education";
+import StudentProfile from "./modules/student/profile/student_profile";
 
 // ===== Layout Components =====
 const HomepageLayout = () => (
@@ -46,9 +47,13 @@ function App() {
           <Route path="/userchoice" element={<UserChoice />} />
 
           {/* Tutor Pages */}
-          {/* <Route path="/tutor" element={<TutorDashboard />} /> */}
+          {/* <Route path="/tutor_dashboard" element={<TutorDashboard />} /> */}
           <Route path="/tutor_profile" element={<TutorProfile />} />
           <Route path="/tutor_education" element={<TutorEducation />} />
+
+           {/* Student Pages */}
+          {/* <Route path="/student_dashboard" element={<StudentDashboard />} /> */}
+          <Route path="/student_profile" element={<StudentProfile />} />
 
          {/* ===== Public Layout ===== */}
           <Route element={<HomepageLayout />}>

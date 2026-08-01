@@ -2,22 +2,20 @@ import React, { useState } from "react";
 import "./signup.css";
 import logo from "../../../assets/logo/logo.png"; 
 import api from "../../../services/api";
-
-const NATIONALITY_OPTIONS = [
-  "", "Australia", "Bangladesh", "United States"
-];
-
-const GENDER_OPTIONS = ["", "Male", "Female", "Other"];
+import { useNavigate } from "react-router-dom";
+import {COUNTRY_OPTIONS, DISTRICT_OPTIONS, GENDER_OPTIONS} from "../../../assets/external/choice_tuple"; 
 
 const Signup = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
     email: "",
     phone_number: "",
     additional_phone_number: "",
-    nationality: "",
-    dob: "",
+    country: "",
+    district: "",
     address: "",
     gender: "",
     profile_image: null,
@@ -46,8 +44,13 @@ const Signup = () => {
     }
 
     // Check dropdown mandatory selections
-    if (!formData.nationality) {
-      alert("Please select your nationality.");
+    if (!formData.country) {
+      alert("Please select your country.");
+      return;
+    }
+
+     if (!formData.dsitrict) {
+      alert("Please select your district.");
       return;
     }
 
@@ -79,6 +82,7 @@ const Signup = () => {
 
       console.log("Form Submitted Successfully:", response.data);
       alert("Tutor account created successfully!");
+      navigate("/signin");
     } catch (error) {
       console.error("Signup error:", error);
       const errorMessage =
@@ -148,7 +152,9 @@ const Signup = () => {
 
           {/* Row 3: phone numbers */}
           <div className="form-row">
-              <label htmlFor="phone_number">Phone Number<span className="required">*</span>
+            <div className="form-group">
+              <label htmlFor="phone_number">
+                Phone Number<span className="required">*</span>
               </label>
               <input
                 id="phone_number"
@@ -156,50 +162,64 @@ const Signup = () => {
                 value={formData.phone_number}
                 onChange={handleChange}
                 placeholder="+8801XXXXXXXXX"
+                required
               />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="additional_phone_number">Additional Phone Number</label>
+              <input
+                id="additional_phone_number"
+                name="additional_phone_number"
+                value={formData.additional_phone_number}
+                onChange={handleChange}
+                placeholder="+8801XXXXXXXXX"
+              />
+            </div>
           </div>
 
-
-          {/* Row 4: Nationality */}
+          {/* Row 4: Country & District */}
           <div className="form-row">
             <div className="form-group">
-              <label htmlFor="nationality">
-                Nationality <span className="required">*</span>
+              <label htmlFor="country">
+                Country <span className="required">*</span>
               </label>
               <select
-                id="nationality"
-                name="nationality"
-                value={formData.nationality}
+                id="country"
+                name="country"
+                value={formData.country}
                 onChange={handleChange}
                 required
               >
-                {NATIONALITY_OPTIONS.map((opt) => (
+                {COUNTRY_OPTIONS.map((opt) => (
                   <option key={opt} value={opt}>
-                    {opt || "Select Nationality"}
+                    {opt || "Select Country"}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="dsitrict">
+                District <span className="required">*</span>
+              </label>
+              <select
+                id="dsitrict"
+                name="district"
+                value={formData.district}
+                onChange={handleChange}
+                required
+              >
+                {DISTRICT_OPTIONS.map((opt) => (
+                  <option key={opt} value={opt}>
+                    {opt || "Select District"}
                   </option>
                 ))}
               </select>
             </div>
           </div>
 
-          {/* Row 5: Date of Birth */}
-          <div className="form-row">
-            <div className="form-group">
-              <label htmlFor="dob">
-                Date of Birth <span className="required">*</span>
-              </label>
-              <input
-                id="dob"
-                name="dob"
-                type="date"
-                value={formData.dob}
-                onChange={handleChange}
-                required
-              />
-            </div>
-          </div>
-
-          {/* Row 6: Address */}
+          {/* Row 5: Address */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="address">
@@ -217,9 +237,10 @@ const Signup = () => {
             </div>
           </div>
 
-           {/* Row 7: Profile Image */}
+          {/* Row 6: Profile Image */}
           <div className="form-group">
-            <label htmlFor="profile_image">Profile Image<span className="required">*</span>
+            <label htmlFor="profile_image">
+              Profile Image <span className="required">*</span>
             </label>
             <div className="profile-image-box">
               <input
@@ -237,7 +258,7 @@ const Signup = () => {
             </div>
           </div>
 
-          {/* Row 8: Gender */}
+          {/* Row 7: Gender */}
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="gender">
