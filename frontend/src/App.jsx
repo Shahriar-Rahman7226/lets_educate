@@ -9,6 +9,7 @@ import UserChoice from "./modules/auth/userchoice/userchoice";
 import TutorProfile from "./modules/tutor/profile/tutor_profile";
 import TutorEducation from "./modules/tutor/education/tutor_education";
 import StudentProfile from "./modules/student/profile/student_profile";
+import StudentDashboard from "./modules/student/dashboard/student_dashboard";
 
 // ===== Layout Components =====
 const HomepageLayout = () => (
@@ -54,6 +55,7 @@ function App() {
            {/* Student Pages */}
           {/* <Route path="/student_dashboard" element={<StudentDashboard />} /> */}
           <Route path="/student_profile" element={<StudentProfile />} />
+          <Route path="/student_dashboard" element={<StudentDashboard />} />
 
          {/* ===== Public Layout ===== */}
           <Route element={<HomepageLayout />}>
