@@ -1,0 +1,421 @@
+/* ==========================================
+   ADMIN FOOTER STYLES
+========================================== */
+
+.admin_footer {
+  background: linear-gradient(145deg, #001f3f, #002b55, #004080);
+
+  color: #e8f1fa;
+
+  padding: 35px 8% 10px;
+
+  font-family: "Poppins", sans-serif;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+.admin_footer a {
+  color: #a8d5f2;
+
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+}
+
+.admin_footer a:hover {
+  color: #5ca0d3;
+}
+
+
+/* ==========================================
+   MAIN CONTAINER
+========================================== */
+
+.admin_footer_container {
+  display: flex;
+
+  justify-content: space-between;
+
+  flex-wrap: wrap;
+
+  gap: 40px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+  padding-bottom: 0px;
+}
+
+
+/* ==========================================
+   LEFT SIDE
+========================================== */
+
+.admin_footer_left {
+  flex: 1 1 500px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+
+/* ==========================================
+   CONTACT SUPPORT
+========================================== */
+
+.admin_footer_contact h4,
+.admin_footer_links h4 {
+  font-size: 1.25rem;
+
+  margin-bottom: 10px;
+
+  color: #a8d5f2;
+
+  letter-spacing: 0.3px;
+}
+
+.admin_footer_contact p,
+.admin_footer_links ul li {
+  font-size: 0.85rem;
+
+  color: #d7e7f8;
+
+  opacity: 0.85;
+
+  padding-bottom: 5px;
+}
+
+.admin_footer_contact p {
+  margin: 3px 0;
+}
+
+
+/* ==========================================
+   ADMIN RESOURCES
+========================================== */
+
+.admin_footer_links ul {
+  list-style: none;
+
+  padding: 0;
+
+  margin: 0;
+}
+
+.admin_footer_links li {
+  margin-bottom: 5px;
+}
+
+.admin_footer_links a:hover {
+  color: #ffffff;
+
+  text-decoration: underline;
+}
+
+
+/* ==========================================
+   RIGHT SIDE
+========================================== */
+
+.admin_footer_right {
+  flex: 1 1 350px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  gap: 80px;
+}
+
+
+/* ==========================================
+   WRITE A REVIEW
+========================================== */
+
+.admin_footer_review {
+  width: 100%;
+
+  max-width: 500px;
+}
+
+.admin_footer_review h4 {
+  font-size: 1.25rem;
+
+  padding-right: 295px;
+  
+  margin: 0 0 10px;
+
+  color: #a8d5f2;
+
+  font-weight: 600;
+}
+
+.admin_footer_review_input {
+  display: flex;
+
+  align-items: center;
+
+  width: 100%;
+
+  gap: 8px;
+}
+
+.admin_footer_review_input input {
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 10px 13px;
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  color: #ffffff;
+
+  font-family: "Poppins", sans-serif;
+
+  font-size: 0.85rem;
+
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease;
+}
+
+.admin_footer_review_input input::placeholder {
+  color: #cce9f9;
+
+  opacity: 0.7;
+}
+
+.admin_footer_review_input input:focus {
+  border-color: #5ca0d3;
+
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.admin_footer_review_input button {
+  padding: 10px 16px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: #cce9f9;
+
+  color: #001f3f;
+
+  font-family: "Poppins", sans-serif;
+
+  font-size: 0.85rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.admin_footer_review_input button:hover {
+  background: #5ca0d3;
+
+  color: #001f3f;
+
+  transform: translateY(-2px);
+}
+
+
+/* ==========================================
+   CONNECT WITH US
+========================================== */
+
+.admin_footer_social {
+  width: 100%;
+}
+
+.admin_footer_social_heading {
+  margin: 0 0 10px;
+
+  font-size: 1.1rem;
+
+  color: #cce9f9;
+
+  font-weight: 500;
+}
+
+.admin_footer_socials {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+}
+
+.admin_footer_socials a {
+  font-size: 1.15rem;
+
+  background: #cce9f9;
+
+  color: #001f3f;
+
+  width: 38px;
+
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  border-radius: 50%;
+
+  transition: all 0.3s ease;
+}
+
+.admin_footer_socials a:hover {
+  background: #5ca0d3;
+
+  color: #001f3f;
+
+  transform: translateY(-3px) scale(1.05);
+}
+
+
+/* ==========================================
+   COPYRIGHT SECTION
+========================================== */
+
+.admin_footer_bottom {
+  text-align: center;
+
+  padding-top: 10px;
+
+  font-size: 0.7rem;
+
+  color: #cce9f9;
+
+  opacity: 0.8;
+}
+
+.admin_footer_bottom p {
+  margin: 0;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+  .admin_footer {
+    padding: 30px 6% 15px;
+  }
+
+  .admin_footer_container {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 30px;
+  }
+
+  .admin_footer_left,
+  .admin_footer_right {
+    width: 100%;
+  }
+
+  .admin_footer_left {
+    gap: 25px;
+  }
+
+  .admin_footer_right {
+    align-items: center;
+  }
+
+  .admin_footer_review {
+    max-width: 600px;
+  }
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 550px) {
+
+  .admin_footer {
+    padding: 28px 20px 12px;
+  }
+
+  .admin_footer_container {
+    gap: 25px;
+
+    padding-bottom: 20px;
+  }
+
+  .admin_footer_contact h4,
+  .admin_footer_links h4,
+  .admin_footer_review h4 {
+    font-size: 1.1rem;
+  }
+
+  .admin_footer_contact p,
+  .admin_footer_links ul li {
+    font-size: 0.85rem;
+  }
+
+  .admin_footer_review_input {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 8px;
+  }
+
+  .admin_footer_review_input input {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+  .admin_footer_review_input button {
+    width: 100%;
+  }
+
+  .admin_footer_social_heading {
+    font-size: 1rem;
+  }
+
+  .admin_footer_socials {
+    gap: 12px;
+  }
+
+  .admin_footer_socials a {
+    width: 35px;
+
+    height: 35px;
+
+    font-size: 1rem;
+  }
+
+  .admin_footer_bottom {
+    font-size: 0.75rem;
+  }
+}

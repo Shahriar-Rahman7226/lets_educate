@@ -1,0 +1,199 @@
+/* ================================
+   Admin Navbar Styles
+================================ */
+
+.admin_navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: linear-gradient(
+    145deg,
+    #001f3f,
+    #002b55,
+    #004080
+  );
+
+  padding: 8px 4vw;
+
+  color: #ffffff;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
+  height: 80px;
+
+  z-index: 9999;
+
+  transition:
+    background 0.4s ease,
+    backdrop-filter 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+/* Navbar sections */
+
+.admin_navbar_left,
+.admin_navbar_center,
+.admin_navbar_right {
+  flex: 1;
+
+  display: flex;
+
+  align-items: center;
+}
+
+.admin_navbar_left {
+  justify-content: flex-start;
+}
+
+.admin_navbar_center {
+  justify-content: center;
+}
+
+.admin_navbar_right {
+  justify-content: flex-end;
+
+  gap: 20px;
+}
+
+
+/* Logo */
+
+.admin_navbar_logo {
+  height: 150px;
+
+  width: auto;
+
+  cursor: pointer;
+
+  transition: transform 0.3s ease;
+
+  transform: translateY(15%);
+}
+
+.admin_navbar_logo:hover {
+  transform: translateY(20%);
+}
+
+
+/* Center text */
+
+.admin_welcome_text {
+  font-size: 2rem;
+
+  font-weight: 500;
+
+  color: #ffffff;
+
+  white-space: nowrap;
+}
+
+
+/* Sign In / Sign Out Button */
+
+.admin_signin_btn {
+  padding: 8px 22px;
+
+  border: 2.5px solid #ffa94d;
+
+  background: transparent;
+
+  border-radius: 40px;
+
+  color: #ffffff;
+
+  font-size: 1.4rem;
+
+  font-weight: 400;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  transition:
+    background 0.5s ease,
+    color 0.5s ease,
+    border 0.5s ease,
+    transform 0.3s ease;
+}
+
+.admin_signin_btn:hover {
+  background: #ffa94d;
+
+  color: #001f3f;
+
+  transform: translateY(-2px);
+}
+
+
+/* Notification Icon */
+
+.admin_navbar_icon {
+  font-size: 1.7rem;
+
+  cursor: pointer;
+
+  color: #ffa94d;
+
+  transition:
+    color 0.4s ease,
+    transform 0.4s ease;
+}
+
+.admin_navbar_icon:hover {
+  color: #ffa94d;
+
+  transform: rotate(-12deg) scale(1.1);
+}
+
+
+/* Spacer for fixed navbar */
+
+.admin_navbar_spacer {
+  height: 80px;
+
+  width: 100%;
+}
+
+
+/* Responsive tweaks */
+
+@media (max-width: 768px) {
+
+  .admin_navbar {
+    height: 70px;
+
+    padding: 7px 4vw;
+  }
+
+  .admin_navbar_logo {
+    height: 65px;
+  }
+
+  .admin_welcome_text {
+    font-size: 18px;
+  }
+
+  .admin_signin_btn {
+    padding: 7px 14px;
+
+    font-size: 14px;
+  }
+
+  .admin_navbar_icon {
+    font-size: 1.4rem;
+  }
+
+  .admin_navbar_right {
+    gap: 14px;
+  }
+
+  .admin_navbar_spacer {
+    height: 70px;
+  }
+}

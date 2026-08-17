@@ -10,6 +10,9 @@ import TutorProfile from "./modules/tutor/profile/tutor_profile";
 import TutorEducation from "./modules/tutor/education/tutor_education";
 import StudentProfile from "./modules/student/profile/student_profile";
 import StudentDashboard from "./modules/student/dashboard/student_dashboard";
+import TutorDashboard from "./modules/tutor/dashboard/tutor_dashboard";
+import UserNavbar from "./components/navbar/user/user_navbar";
+import UserFooter from "./components/footer/user/user_footer";
 
 // ===== Layout Components =====
 const HomepageLayout = () => (
@@ -20,27 +23,31 @@ const HomepageLayout = () => (
   </>
 );
 
-// const HomepageUserLayout = () => (
-//   <>
-//     <UserNavbar />
-//     <Outlet />
-//     <HomepageFooter />
-//   </>
-// );
-
-// const UserLayout = () => (
-//   <>
-//     <UserNavbar />
-//     <Outlet />
-//     <UserFooter />
-//   </>
-// );
+const UserLayout = () => (
+  <>
+    <UserNavbar />
+    <Outlet />
+    <UserFooter />
+  </>
+);
 
 // ===== App Component =====
 function App() {
   return (
     <Router>
       <Routes>
+
+         {/* ===== Public Layout ===== */}
+          <Route element={<HomepageLayout />}>
+            <Route path="/" element={<Homepage />} />
+          </Route>
+
+          {/* ===== User Layout ===== */}
+          <Route element={<UserLayout />}>
+            <Route path="/student_dashboard" element={<StudentDashboard />} />
+            <Route path="/tutor_dashboard" element={<TutorDashboard />} /> 
+          </Route>
+
          {/* Auth Pages */}
           <Route path="/signin" element={<SignIn />} />
           <Route path="/tutor_signup" element={<TutorSignUp />} />
@@ -48,19 +55,12 @@ function App() {
           <Route path="/userchoice" element={<UserChoice />} />
 
           {/* Tutor Pages */}
-          {/* <Route path="/tutor_dashboard" element={<TutorDashboard />} /> */}
           <Route path="/tutor_profile" element={<TutorProfile />} />
           <Route path="/tutor_education" element={<TutorEducation />} />
 
            {/* Student Pages */}
-          {/* <Route path="/student_dashboard" element={<StudentDashboard />} /> */}
           <Route path="/student_profile" element={<StudentProfile />} />
-          <Route path="/student_dashboard" element={<StudentDashboard />} />
 
-         {/* ===== Public Layout ===== */}
-          <Route element={<HomepageLayout />}>
-            <Route path="/" element={<Homepage />} />
-          </Route>
       </Routes>
     </Router>
   );

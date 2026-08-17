@@ -1,9 +1,10 @@
-import React from "react";
-import "./student_dashboard.css";
-import StudentImage from "../../../assets/images/student.webp";
+// import React, { useState } from "react";
+import "./tutor_dashboard.css";
+import TutorImage from "../../../assets/images/student.webp";
 import { useNavigate } from "react-router-dom";
+
 import {
-  FaPlus,
+  FaSearch,
   FaCoins,
   FaBullhorn,
   FaLongArrowAltRight,
@@ -12,122 +13,135 @@ import {
   FaClipboardList,
   FaUserCog,
   FaUsers,
+  FaFileAlt,
 } from "react-icons/fa";
 
-const StudentDashboard = () => {
+const TutorDashboard = () => {
   const navigate = useNavigate();
 
-  const studentData = {
+  const tutorData = {
     first_name: "Shahriar",
     last_name: "Rahman Rafi",
-    full_name: "Shahriar Omar Rafi",
-    student_id: "S1234567",
+    full_name: "Shahriar Rahman Rafi",
+    tutor_id: "T1234567",
     nationality: "Bangladeshi",
     email: "shahriar.rafi@example.com",
     phone_number: "+8801789456123",
     additional_phone_number: "+8801629456119",
     curriculum: "Cambridge",
     dob: "07 September 2002",
-    profile_image: StudentImage,
-    completed_sessions: 2,
-    wallet_balance: 120,
+    profile_image: TutorImage,
+
+    completed_sessions: 24,
+    wallet_balance: 850,
   };
 
   const dashboardTiles = [
     {
-      title: "Create Session",
-      description: "Find a tutor and create a new learning session.",
-      icon: <FaPlus />,
-      className: "create-session-tile",
-      action: () => navigate("/student_session_form"),
+      title: "Available Sessions",
+      description:
+        "Browse available tutoring sessions and apply for the ones that suit you.",
+      icon: <FaSearch />,
+      className: "available-sessions-tile",
+      action: () => navigate("/available_sessions"),
     },
+
     {
       title: "Session History",
-      description: "View your previous, upcoming and cancelled sessions.",
+      description:
+        "View your previous, upcoming and cancelled tutoring sessions.",
       icon: <FaHistory />,
       className: "session-history-tile",
-      action: () => navigate("/student_session_history"),
+      action: () => navigate("/tutor_session_history"),
     },
+
     {
-      title: "Learning Resources",
-      description: "Explore study materials and useful learning resources.",
-      icon: <FaBookOpen />,
-      className: "learning-resources-tile",
-      action: () => navigate("/curriculum_details"),
+      title: "Session Materials",
+      description:
+        "Provide students with homework, classwork, notes and other learning materials.",
+      icon: <FaFileAlt />,
+      className: "session-materials-tile",
+      action: () => navigate("/tutor_session_materials"),
     },
+
     {
-      title: "Our Tutors",
-      description: "Browse tutors and find the right tutor for you.",
+      title: "My Students",
+      description:
+        "View your students and access their learning and session information.",
       icon: <FaUsers />,
-      className: "tutors-tile",
-      action: () => navigate("/tutors"),
+      className: "students-tile",
+      action: () => navigate("/tutor_students"),
     },
+
     {
       title: "Guidelines & Instructions",
-      description: "Learn how sessions and the platform work.",
+      description:
+        "Learn how sessions, applications and tutoring on the platform work.",
       icon: <FaClipboardList />,
       className: "guidelines-tile",
-      action: () => navigate("/student_instruction"),
+      action: () => navigate("/tutor_instruction"),
     },
+
     {
       title: "Account Management",
-      description: "Manage your profile and account information.",
+      description:
+        "Manage your profile, personal information and account settings.",
       icon: <FaUserCog />,
       className: "account-tile",
-      action: () => navigate("/student_account"),
+      action: () => navigate("/tutor_account"),
     },
   ];
 
   return (
-    <div className="student-dashboard-page">
-      <section className="student-dashboard-section">
+    <div className="tutor-dashboard-page">
+      <section className="tutor-dashboard-section">
 
-        {/* ================= STUDENT INFORMATION ================= */}
-        <div className="student-info-container">
-          <div className="student-image">
+        {/* ================= TUTOR INFORMATION ================= */}
+        <div className="tutor-info-container">
+          <div className="tutor-image">
             <img
-              src={studentData.profile_image}
-              alt="Student Profile"
+              src={tutorData.profile_image}
+              alt="Tutor Profile"
             />
           </div>
 
-          <div className="student-details">
-            <h3>Student Information</h3>
+          <div className="tutor-details">
+            <h3>Tutor Information</h3>
 
             <p>
               <strong>Name:</strong>{" "}
-              {studentData.full_name}
+              {tutorData.full_name}
             </p>
 
             <p>
-              <strong>Student ID:</strong>{" "}
-              {studentData.student_id}
+              <strong>Tutor ID:</strong>{" "}
+              {tutorData.tutor_id}
             </p>
 
             <p>
               <strong>Email:</strong>{" "}
-              {studentData.email}
+              {tutorData.email}
             </p>
 
             <p>
               <strong>Phone:</strong>{" "}
-              {studentData.phone_number},{" "}
-              {studentData.additional_phone_number}
+              {tutorData.phone_number},{" "}
+              {tutorData.additional_phone_number}
             </p>
 
             <p>
               <strong>Nationality:</strong>{" "}
-              {studentData.nationality}
+              {tutorData.nationality}
             </p>
 
             <p>
               <strong>Curriculum:</strong>{" "}
-              {studentData.curriculum}
+              {tutorData.curriculum}
             </p>
 
             <p>
               <strong>Date of Birth:</strong>{" "}
-              {studentData.dob}
+              {tutorData.dob}
             </p>
           </div>
         </div>
@@ -138,7 +152,9 @@ const StudentDashboard = () => {
           <div className="wallet-reflection"></div>
 
           <div className="wallet-header">
+
             <div className="wallet-balance-area">
+
               <div className="wallet-icon">
                 <FaCoins />
               </div>
@@ -149,50 +165,50 @@ const StudentDashboard = () => {
                 </p>
 
                 <h3 className="wallet-amount">
-                  ${studentData.wallet_balance}
+                  ${tutorData.wallet_balance}
                 </h3>
               </div>
+
             </div>
 
             <div className="wallet-actions">
-              <button
-                className="add-wallet-btn"
-                onClick={() => navigate("/student_add_money")}
-              >
-                <FaPlus />
-                Add Money
-              </button>
 
               <button
                 className="payment-history-btn"
                 onClick={() =>
-                  navigate("/student_payment_history")
+                  navigate("/tutor_payment_history")
                 }
               >
                 Payment History
                 <FaLongArrowAltRight />
               </button>
+
             </div>
+
           </div>
 
           <div className="wallet-motivation">
             <FaBullhorn />
 
             <span>
-              Complete 5 sessions and receive a{" "}
-              <strong>10% discount</strong> on your next class!
+              Complete more sessions and build your
+              <strong> tutoring reputation</strong> to attract more students!
             </span>
           </div>
+
         </div>
 
         {/* ================= DASHBOARD TILES ================= */}
         <div className="dashboard-tiles-section">
+
           {dashboardTiles.map((tile) => (
+
             <button
               key={tile.title}
               className={`dashboard-tile ${tile.className}`}
               onClick={tile.action}
             >
+
               <div className="tile-glass-shine"></div>
 
               <div className="tile-icon">
@@ -200,13 +216,21 @@ const StudentDashboard = () => {
               </div>
 
               <div className="tile-content">
+
                 <h3>{tile.title}</h3>
-                <p>{tile.description}</p>
+
+                <p>
+                  {tile.description}
+                </p>
+
               </div>
 
               <FaLongArrowAltRight className="tile-arrow" />
+
             </button>
+
           ))}
+
         </div>
 
       </section>
@@ -214,4 +238,4 @@ const StudentDashboard = () => {
   );
 };
 
-export default StudentDashboard;
+export default TutorDashboard;
