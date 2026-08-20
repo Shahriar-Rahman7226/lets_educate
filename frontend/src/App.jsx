@@ -13,6 +13,7 @@ import StudentDashboard from "./modules/student/dashboard/student_dashboard";
 import TutorDashboard from "./modules/tutor/dashboard/tutor_dashboard";
 import UserNavbar from "./components/navbar/user/user_navbar";
 import UserFooter from "./components/footer/user/user_footer";
+import StudentSessionBooking from "./modules/student/session_booking/student_session_booking";
 
 // ===== Layout Components =====
 const HomepageLayout = () => (
@@ -46,6 +47,7 @@ function App() {
           <Route element={<UserLayout />}>
             <Route path="/student_dashboard" element={<StudentDashboard />} />
             <Route path="/tutor_dashboard" element={<TutorDashboard />} /> 
+            <Route path="/student_session_booking" element={<StudentSessionBooking />} /> 
           </Route>
 
          {/* Auth Pages */}
