@@ -32,31 +32,6 @@ const StudentSessionBooking = () => {
     description: "",
   });
 
-  const subjectSuggestions = [
-    "Mathematics",
-    "Physics",
-    "Chemistry",
-    "Biology",
-    "English",
-    "Bangla",
-    "ICT",
-    "Computer Science",
-  ];
-
-  const daySuggestions = [
-    "Saturday",
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Friday, Saturday",
-    "Saturday, Sunday",
-    "Saturday, Monday, Wednesday",
-    "Sunday, Tuesday, Thursday",
-  ];
-
   const classOptions = [
     "Class 1",
     "Class 2",
@@ -220,23 +195,10 @@ const StudentSessionBooking = () => {
                   id="session-subjects"
                   type="text"
                   name="subjects"
-                  list="session-subject-suggestions"
                   placeholder="e.g. Mathematics, Physics"
-                  value={sessionForm.subjects}
                   onChange={handleSessionChange}
                   required
                 />
-
-                <datalist id="session-subject-suggestions">
-                  {subjectSuggestions.map((subject) => (
-                    <option key={subject} value={subject} />
-                  ))}
-                </datalist>
-
-                <small className="field-help">
-                  Start typing to see common subject suggestions. You may
-                  enter more than one subject.
-                </small>
               </div>
 
               {/* End Date */}
@@ -293,23 +255,10 @@ const StudentSessionBooking = () => {
                   id="session-days"
                   type="text"
                   name="preferableDays"
-                  list="session-day-suggestions"
                   placeholder="e.g. Friday, Saturday"
-                  value={sessionForm.preferableDays}
                   onChange={handleSessionChange}
                   required
                 />
-
-                <datalist id="session-day-suggestions">
-                  {daySuggestions.map((day) => (
-                    <option key={day} value={day} />
-                  ))}
-                </datalist>
-
-                <small className="field-help">
-                  Start typing to see common day suggestions. You may enter
-                  multiple preferred days.
-                </small>
               </div>
 
               {/* Description */}
@@ -322,7 +271,7 @@ const StudentSessionBooking = () => {
                   id="session-description"
                   name="description"
                   rows="6"
-                  placeholder="Tell us more about your learning goals, preferred teaching style, weak topics, exam preparation needs, or any other requirements."
+                  placeholder="Tell us more about your learning goals, preferred teaching style, weak topics, exam preparation needs or any other requirements."
                   value={sessionForm.description}
                   onChange={handleSessionChange}
                 />
@@ -415,23 +364,12 @@ const StudentSessionBooking = () => {
                   id="package-subjects"
                   type="text"
                   name="subjects"
-                  list="package-subject-suggestions"
+                  // list="package-subject-suggestions"
                   placeholder="e.g. Mathematics, Physics"
-                  value={packageForm.subjects}
+                  // value={packageForm.subjects}
                   onChange={handlePackageChange}
                   required
                 />
-
-                <datalist id="package-subject-suggestions">
-                  {subjectSuggestions.map((subject) => (
-                    <option key={subject} value={subject} />
-                  ))}
-                </datalist>
-
-                <small className="field-help">
-                  Start typing to see common subject suggestions. You may
-                  enter more than one subject.
-                </small>
               </div>
 
               {/* Preferred Time */}
@@ -464,23 +402,10 @@ const StudentSessionBooking = () => {
                   id="package-days"
                   type="text"
                   name="preferableDays"
-                  list="package-day-suggestions"
                   placeholder="e.g. Friday, Saturday"
-                  value={packageForm.preferableDays}
                   onChange={handlePackageChange}
                   required
                 />
-
-                <datalist id="package-day-suggestions">
-                  {daySuggestions.map((day) => (
-                    <option key={day} value={day} />
-                  ))}
-                </datalist>
-
-                <small className="field-help">
-                  Start typing to see common day suggestions. You may enter
-                  multiple preferred days.
-                </small>
               </div>
 
               {/* Description */}
@@ -493,7 +418,7 @@ const StudentSessionBooking = () => {
                   id="package-description"
                   name="description"
                   rows="6"
-                  placeholder="Tell us about your learning goals, preferred teaching style, syllabus coverage, exam preparation, or any other requirements."
+                  placeholder="Tell us about your learning goals, preferred teaching style, syllabus coverage, exam preparation or any other requirements."
                   value={packageForm.description}
                   onChange={handlePackageChange}
                 />

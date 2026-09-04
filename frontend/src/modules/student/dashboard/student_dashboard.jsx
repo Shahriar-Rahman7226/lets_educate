@@ -35,11 +35,11 @@ const StudentDashboard = () => {
 
   const dashboardTiles = [
     {
-      title: "Create Session",
-      description: "Find a tutor and create a new learning session.",
+      title: "Book Session",
+      description: "Find a tutor and book a new learning session.",
       icon: <FaPlus />,
       className: "create-session-tile",
-      action: () => navigate("/student_session_form"),
+      action: () => navigate("/student_session_booking"),
     },
     {
       title: "Session History",
