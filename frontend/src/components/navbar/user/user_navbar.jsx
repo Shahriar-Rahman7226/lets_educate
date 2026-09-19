@@ -9,7 +9,7 @@ const AdminNavbar = () => {
   const navigate = useNavigate();
 
   // Dynamically decide home link based on current role path
-  let homeLink = "/"; // default fallback
+  let homeLink = "/"; 
 
   if (location.pathname.startsWith("/admin")) {
     homeLink = "/admin";

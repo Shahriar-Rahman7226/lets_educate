@@ -122,6 +122,11 @@ CURRENT_EDUCATION_LEVEL = (
     ('masters', 'Masters'),
 )
 
+BOOKING_TYPE = [
+        ('Session', 'Session'),
+        ('Package', 'Package'),
+    ]
+
 OTP_PURPOSE = (
     ('LOGIN', 'Login'),
     ('REGISTER', 'Register'),
